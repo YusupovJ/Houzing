@@ -22,11 +22,20 @@ const Header = (props) => {
 					<Logo />
 					<p>Houzing</p>
 				</Link>
-				<nav className={`header__navigator ${menu === true ? "toggled" : "unToggled"}`}>
+				<nav
+					className={`header__navigator ${
+						menu === true ? "toggled" : "unToggled"
+					}`}
+				>
 					<div className="header__nav-body">
 						{data.navbar.map((link) => {
 							return (
-								<NavLink className="header__link" key={link.id} to={link.path}>
+								<NavLink
+									onClick={() => setMenu(false)}
+									className="header__link"
+									key={link.id}
+									to={link.path}
+								>
 									{link.text}
 								</NavLink>
 							);
@@ -35,14 +44,21 @@ const Header = (props) => {
 					<div
 						onClick={() => {
 							setMenu(!menu);
-							if (menu === true) document.body.classList.remove("lock");
+							if (menu === true)
+								document.body.classList.remove("lock");
 							else document.body.classList.add("lock");
 						}}
-						className={`header__burger ${menu === true ? "toggled" : "unToggled"}`}>
+						className={`header__burger ${
+							menu === true ? "toggled" : "unToggled"
+						}`}
+					>
 						<div></div>
 					</div>
 				</nav>
-				<Button onClick={() => navigate("/login")} className="header__login">
+				<Button
+					onClick={() => navigate("/login")}
+					className="header__login"
+				>
 					<p>Login</p>
 					<Login className="header__login-icon" />
 				</Button>
