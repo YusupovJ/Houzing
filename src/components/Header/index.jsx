@@ -31,7 +31,10 @@ const Header = (props) => {
 						{data.navbar.map((link) => {
 							return (
 								<NavLink
-									onClick={() => setMenu(false)}
+									onClick={() => {
+										setMenu(false);
+										document.body.classList.remove("lock");
+									}}
 									className="header__link"
 									key={link.id}
 									to={link.path}
