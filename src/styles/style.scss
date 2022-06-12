@@ -1,0 +1,48 @@
+@use "sass:math";
+
+/* Подключение шрифтов ======================================================================= */
+// &display=swap - поддержка кирилицы
+@import "https://fonts.googleapis.com/css?family=Montserrat:regular,600,700&display=swap";
+
+/* Подключение файлом */ //(если есть)
+@import "./fonts";
+
+// Шрифт по умолчанию =======================================================================//
+$fontFamily: "Montserrat";
+
+// Настройки ================================================================================//
+$container: 1180;
+$paddingContainer: 16;
+
+/* Обнуление ================================================================================ */
+@import "./null";
+
+/* Тело страницы ============================================================================= */
+body {
+    font-family: $fontFamily;
+    background-color: #ffffff;
+    &.lock {
+        overflow: hidden;
+        touch-action: none;
+    }
+}
+
+/* Оболочка ================================================================================== */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Прижатие футера к низу*/
+.wrapper > main {
+    flex: 1 1 auto;
+}
+
+/* Контейнер ================================================================================= */
+[class*="__container"] {
+    max-width: $container + $paddingContainer * 2 + px;
+    margin: 0px auto;
+    padding: 0px $paddingContainer + px;
+}
