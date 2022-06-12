@@ -13,7 +13,6 @@ import Button from "../Button";
 
 const Header = (props) => {
 	const navigate = useNavigate();
-
 	const [menu, setMenu] = useState(false);
 	return (
 		<HeaderStyle className="header">
