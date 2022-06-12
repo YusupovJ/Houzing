@@ -18,7 +18,14 @@ const Header = (props) => {
 	return (
 		<HeaderStyle className="header">
 			<div className="header__container">
-				<Link to="/" className="header__logo">
+				<Link
+					onClick={() => {
+						setMenu(false);
+						document.body.classList.remove("lock");
+					}}
+					to="/"
+					className="header__logo"
+				>
 					<Logo />
 					<p>Houzing</p>
 				</Link>
