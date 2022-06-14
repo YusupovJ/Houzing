@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { AboutStyle } from "./style";
-import { data } from "../../../helpers/mock/mock";
+import { aboutSlides } from "../../../helpers/mock/mock";
 import { isMobile } from "../../../helpers/functions/functions";
 import { useMatchMedia } from "../../../helpers/functions/functions";
-import Search from "../Search";
+import Filter from "../../../components/Filter";
 import Button from "../../../components/Button";
 
 /*------------------------------------*/
@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 /*------------------------------------*/
 
 const About = (props) => {
-	const showSearch = useMatchMedia();
+	const showFilter = useMatchMedia();
 	return (
 		<AboutStyle className="about">
 			<div className="about__wrapper">
@@ -31,25 +31,40 @@ const About = (props) => {
 						delay: 4000,
 						disableOnInteraction: false,
 					}}
-					className="about__slider">
-					{data.aboutSlides.map((slide, index) => {
+					className="about__slider"
+				>
+					{aboutSlides.map((slide, index) => {
 						return (
-							<SwiperSlide key={index} className="about__slide-item">
-								<img src={slide.bg} alt="BG" className="about__bg" />
+							<SwiperSlide
+								key={index}
+								className="about__slide-item"
+							>
+								<img
+									src={slide.bg}
+									alt="BG"
+									className="about__bg"
+								/>
 								<div className="about__container">
-									<h1 className="about__title">{slide.title}</h1>
+									<h1 className="about__title">
+										{slide.title}
+									</h1>
 									<p className="about__text">{slide.text}</p>
 									<ul className="about__ownerships">
 										{slide.own.map((item, index) => {
 											return (
-												<li key={index} className="about__own">
+												<li
+													key={index}
+													className="about__own"
+												>
 													{item.icon}
 													<p>{item.text}</p>
 												</li>
 											);
 										})}
 									</ul>
-									<p className="about__price">{slide.price}</p>
+									<p className="about__price">
+										{slide.price}
+									</p>
 									<Button className="about__button">
 										<p>Read more</p>
 									</Button>
@@ -58,10 +73,10 @@ const About = (props) => {
 						);
 					})}
 				</Swiper>
-				{showSearch ? null : <Search />}
+				{showFilter ? null : <Filter />}
 			</div>
 		</AboutStyle>
 	);
 };
 
-export default About;
+export default memo(About);

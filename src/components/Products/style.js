@@ -2,19 +2,12 @@ import styled from "styled-components";
 import { em } from "../../helpers/functions/functions";
 
 export const ProductsStyle = styled.section`
-	margin: 96px 0px;
-	.products__container {
-	}
-	.products__text-block {
-	}
-	.products__slider {
-	}
+	padding: 96px 0px 48px;
 	.swiper-pagination-bullet {
 		background: #0061df;
 		border: 2px solid #fff;
 		box-sizing: content-box;
 		opacity: 1;
-		transform: translate(0px, 65px);
 		transition: border 0.3s ease 0s;
 		margin: 0px 13px 0px 0px !important;
 		&:last-child {
@@ -25,7 +18,14 @@ export const ProductsStyle = styled.section`
 		border: 2px solid #0061df;
 		background-color: #fff;
 	}
+	.swiper-pagination-bullet-active-next,
+	.swiper-pagination-bullet-active-next-next,
+	.swiper-pagination-bullet-active-prev,
+	.swiper-pagination-bullet-active-prev-prev {
+		transform: scale(1);
+	}
 	.swiper {
+		padding: 0px 0px 65px 0px;
 		display: flex;
 		overflow: visible;
 		position: relative;
@@ -96,19 +96,22 @@ export const ProductsStyle = styled.section`
 		.swiper-button-prev,
 		.swiper-button-next {
 			top: 100%;
-			transform: translate(0, 100%);
+			transform: translate(0, -50%);
 		}
 		.swiper-button-prev {
 			left: 0px;
 			&:active {
-				transform: translate(-5px, 100%);
+				transform: translate(-5px, -50%);
 			}
 		}
 		.swiper-button-next {
 			right: 0px;
 			&:active {
-				transform: translate(5px, 100%);
+				transform: translate(5px, -50%);
 			}
 		}
+	}
+	@media only screen and (max-width: ${em(767.98)}) {
+		padding: 64px 0px 32px;
 	}
 `;

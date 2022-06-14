@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { HeaderStyle } from "./style";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 /*------------------------------------*/
 
-import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
 import { ReactComponent as Login } from "../../assets/svg/login.svg";
 
 /*------------------------------------*/
 
-import { data } from "../../helpers/mock/mock";
+import { navbar, header } from "../../helpers/mock/mock";
 import Button from "../Button";
 
 const Header = (props) => {
@@ -25,8 +24,8 @@ const Header = (props) => {
 					to="/"
 					className="header__logo"
 				>
-					<Logo />
-					<p>Houzing</p>
+					{header.logo}
+					<p>{header.logoText}</p>
 				</Link>
 				<nav
 					className={`header__navigator ${
@@ -34,7 +33,7 @@ const Header = (props) => {
 					}`}
 				>
 					<div className="header__nav-body">
-						{data.navbar.map((link) => {
+						{navbar.map((link) => {
 							return (
 								<NavLink
 									onClick={() => {
@@ -68,7 +67,7 @@ const Header = (props) => {
 					onClick={() => navigate("/login")}
 					className="header__login"
 				>
-					<p>Login</p>
+					<p>{header.buttonText}</p>
 					<Login className="header__login-icon" />
 				</Button>
 			</div>
@@ -76,4 +75,4 @@ const Header = (props) => {
 	);
 };
 
-export default Header;
+export default memo(Header);

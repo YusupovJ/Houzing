@@ -6,6 +6,8 @@ import { ReactComponent as Favourite } from "../../assets/svg/favourite.svg";
 const Card = ({ image, ava, title, address, ownership, price, sale }) => {
 	return (
 		<CardStyle className="card">
+			<div className="card__type card__type_featured">Featured</div>
+			<div className="card__type card__type_for-sale">For Sale</div>
 			<div className="card__image">
 				<img src={image} alt="Product" />
 				<div className="card__ava">
@@ -13,16 +15,14 @@ const Card = ({ image, ava, title, address, ownership, price, sale }) => {
 				</div>
 			</div>
 			<div className="card__body">
-				<h3 className="card__title">
-					{title || "Забыл дать название ._."}
-				</h3>
-				<p className="card__address">{address || "Сам найди штоле"}</p>
+				<h3 className="card__title">{title}</h3>
+				<p className="card__address">{address}</p>
 				<ul className="card__ownership">
 					{ownership.map((item, index) => {
 						return (
 							<li className="card__own" key={index}>
 								{item[0]}
-								<p>{item[1] || "Дофига штук"}</p>
+								<p>{item[1]}</p>
 							</li>
 						);
 					})}
@@ -30,10 +30,8 @@ const Card = ({ image, ava, title, address, ownership, price, sale }) => {
 			</div>
 			<div className="card__info">
 				<div className="card__price">
-					<del className="card__sale-price">{sale || null}</del>
-					<p className="card__real-price">
-						{price || "Денег не хватит"}
-					</p>
+					<del className="card__sale-price">{sale}</del>
+					<p className="card__real-price">{price}</p>
 				</div>
 				<div className="card__action">
 					<button className="card__zoom">

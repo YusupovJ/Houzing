@@ -6,12 +6,36 @@ export const CardStyle = styled.div`
 	overflow: hidden;
 	transition: all 0.3s ease 0s;
 	border: 1px solid #e6e9ec;
+	position: relative;
 	cursor: pointer;
 	&:hover {
 		box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.06);
 	}
+	.card__type {
+		position: absolute;
+		top: 20px;
+		padding: 7px 14px;
+		text-transform: uppercase;
+		color: #fff;
+		border-radius: 3px;
+		font-family: "Cerebri Sans";
+		font-style: normal;
+		font-weight: 600;
+		font-size: ${rem(12)};
+		z-index: 3;
+		line-height: ${10 / 13};
+	}
+	.card__type_for-sale {
+		right: 20px;
+		background-color: #0d263b;
+	}
+	.card__type_featured {
+		background-color: #0061df;
+		left: 20px;
+	}
 	.card__image {
 		position: relative;
+		user-select: none;
 		img {
 			display: inline-block;
 			width: 100%;
@@ -35,6 +59,7 @@ export const CardStyle = styled.div`
 		}
 	}
 	.card__body {
+		border-top: 1px solid #e6e9ec;
 		padding: 24px 20px 0px;
 	}
 	.card__title {
