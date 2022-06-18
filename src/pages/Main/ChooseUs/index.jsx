@@ -1,7 +1,7 @@
 import React from "react";
 import { ChooseUsStyle } from "./style";
 import Title from "../../../components/Title";
-import { chooseUs } from "../../../helpers/mock/mock";
+import { chooseUs } from "../../../helpers/utils/chooseUs";
 
 const ChooseUs = (props) => {
 	return (

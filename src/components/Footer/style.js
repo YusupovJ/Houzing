@@ -94,6 +94,12 @@ export const FooterStyle = styled.footer`
 		background: #0061df;
 		border-radius: 3px;
 		margin: 0px 0px 0px 10px;
+		&:active {
+			transform: scale(0.95);
+		}
+		&:hover {
+			background-color: #1053a9;
+		}
 		svg {
 			transform: rotate(90deg);
 		}

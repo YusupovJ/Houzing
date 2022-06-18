@@ -42,7 +42,7 @@ export const FilterStyle = styled.section`
 		padding: 13px 0px 0px 0px;
 		right: 0;
 		transform: translate(0, 100%);
-		z-index: 999;
+		z-index: 10;
 		visibility: hidden;
 		opacity: 0;
 		transition: all 0.3s ease 0s;

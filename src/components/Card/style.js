@@ -36,6 +36,7 @@ export const CardStyle = styled.div`
 	.card__image {
 		position: relative;
 		user-select: none;
+		height: 220px;
 		img {
 			display: inline-block;
 			width: 100%;
@@ -54,8 +55,11 @@ export const CardStyle = styled.div`
 		overflow: hidden;
 		border: 2px solid #fff;
 		box-shadow: 0px 0px 10px rgba(13, 38, 59, 0.2);
+		background-color: #fff;
 		img {
-			max-width: 100%;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
 		}
 	}
 	.card__body {

@@ -54,7 +54,15 @@ const Footer = (props) => {
 					</Link>
 					<small>
 						Copyright © 2021 CreativeLayers. All Right Reserved.
-						<button className="footer__up">
+						<button
+							onClick={(e) => {
+								document.documentElement.scrollTo({
+									top: 0,
+									behavior: "smooth",
+								});
+							}}
+							className="footer__up"
+						>
 							<Arrow />
 						</button>
 					</small>

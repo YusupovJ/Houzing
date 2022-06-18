@@ -33,7 +33,7 @@ const Main = (props) => {
 								ava={item.ava}
 								price={item.price}
 								sale={item.sale}
-								ownership={item.ownership}
+								houseDetails={item.houseDetails}
 							/>
 						</SwiperSlide>
 					);
@@ -72,7 +72,7 @@ const Main = (props) => {
 								ava={item.ava}
 								price={item.price}
 								sale={item.sale}
-								ownership={item.ownership}
+								houseDetails={item.houseDetails}
 							/>
 						</SwiperSlide>
 					);
