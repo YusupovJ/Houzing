@@ -3,6 +3,8 @@ import { CardStyle } from "./style";
 import { ReactComponent as Zoom } from "../../assets/svg/zoom.svg";
 import { ReactComponent as Favourite } from "../../assets/svg/favourite.svg";
 
+/* Это шаблон карточки товара */
+
 const Card = ({ image, ava, title, address, ownership, price, sale }) => {
 	return (
 		<CardStyle className="card">

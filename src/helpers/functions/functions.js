@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 
 /*------------------------------------*/
 
+// Конвертация из px в rem em и %
+
 export function rem(num) {
 	return num / 16 + "rem";
 }
@@ -15,6 +17,8 @@ export function per(num, parent) {
 }
 
 /*------------------------------------*/
+
+// Проверка на тачскрин
 
 export let isMobile = {
 	Android: function () {
@@ -45,6 +49,8 @@ export let isMobile = {
 
 /*------------------------------------*/
 
+// Медиа запросы
+
 export const useMatchMedia = (width = 768) => {
 	const [toggleChange, setToggleChange] = useState(false);
 	const matchMediaRef = useRef(null);
@@ -74,6 +80,5 @@ export const useMatchMedia = (width = 768) => {
 		};
 	}, [width]);
 
-	// 4. Return whether change happened
 	return toggleChange;
 };

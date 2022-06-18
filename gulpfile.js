@@ -13,7 +13,7 @@ const otf2ttf = () => {
 		.pipe(
 			fonter({
 				formats: ["ttf"],
-			}),
+			})
 		)
 		.pipe(gulp.dest(`${path.assets}/fonts/`));
 };
@@ -24,7 +24,7 @@ const ttf2woff = () => {
 		.pipe(
 			fonter({
 				formats: ["woff"],
-			}),
+			})
 		)
 		.pipe(gulp.dest(`${path.assets}/fonts/`))
 		.pipe(gulp.src(`${path.assets}/fonts/*.ttf`))
@@ -33,7 +33,7 @@ const ttf2woff = () => {
 };
 
 const fontsStyle = () => {
-	let fontsFile = `./src/styles/fonts.scss`;
+	let fontsFile = `${path.assets}/styles/fonts.scss`;
 	fs.readdir(`${path.assets}/fonts/`, function (err, fontsFiles) {
 		if (fontsFiles) {
 			if (!fs.existsSync(fontsFile)) {
@@ -42,8 +42,12 @@ const fontsStyle = () => {
 				for (let index = 0; index < fontsFiles.length; index++) {
 					let fontFileName = fontsFiles[index].split(".")[0];
 					if (newFileOnly !== fontFileName) {
-						let fontName = fontFileName.split("-")[0] ? fontFileName.split("-")[0] : fontFileName;
-						let fontWeight = fontFileName.split("-")[1] ? fontFileName.split("-")[1] : fontFileName;
+						let fontName = fontFileName.split("-")[0]
+							? fontFileName.split("-")[0]
+							: fontFileName;
+						let fontWeight = fontFileName.split("-")[1]
+							? fontFileName.split("-")[1]
+							: fontFileName;
 						if (fontWeight.toLowerCase() === "thin") {
 							fontWeight = 100;
 						} else if (fontWeight.toLowerCase() === "light") {
@@ -54,14 +58,21 @@ const fontsStyle = () => {
 							fontWeight = 600;
 						} else if (fontWeight.toLowerCase() === "bold") {
 							fontWeight = 700;
-						} else if (fontWeight.toLowerCase() === "extrabold" || fontWeight.toLowerCase() === "heavy") {
+						} else if (
+							fontWeight.toLowerCase() === "extrabold" ||
+							fontWeight.toLowerCase() === "heavy"
+						) {
 							fontWeight = 800;
 						} else if (fontWeight.toLowerCase() === "black") {
 							fontWeight = 900;
 						} else {
 							fontWeight = 400;
 						}
-						fs.appendFile(fontsFile, `@font-face{\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("../fonts/${fontFileName}.woff2") format("woff2"), url("../fonts/${fontFileName}.woff") format("woff"), url("../fonts/${fontFileName}.ttf") format("ttf");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`, cb);
+						fs.appendFile(
+							fontsFile,
+							`@font-face{\n\tfont-family: ${fontName};\n\tfont-display: swap;\n\tsrc: url("../fonts/${fontFileName}.woff2") format("woff2"), url("../fonts/${fontFileName}.woff") format("woff"), url("../fonts/${fontFileName}.ttf") format("ttf");\n\tfont-weight: ${fontWeight};\n\tfont-style: normal;\n}\r\n`,
+							cb
+						);
 						newFileOnly = fontFileName;
 					}
 				}

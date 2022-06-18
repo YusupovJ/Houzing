@@ -62,7 +62,7 @@ export const FilterStyle = styled.section`
 		font-size: ${rem(16)};
 		line-height: 150%;
 		color: #0d263b;
-		margin: 20px 0px 0px;
+		margin: ${em(20, 16)} 0px 0px;
 	}
 	.popover__inputs {
 		display: flex;
@@ -128,7 +128,7 @@ export const FilterStyle = styled.section`
 			padding: 1px 10px 10px 10px;
 		}
 		.popover__title {
-			margin: 10px 0px 0px 0px;
+			margin: ${em(10, 16)} 0px 0px;
 		}
 		.popover__buttons {
 			padding: 10px;

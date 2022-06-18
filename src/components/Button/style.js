@@ -29,7 +29,8 @@ export const ButtonStyle = styled.button`
 		z-index: 1;
 	}
 	${(props) => {
-		if (props.type === "blue") {
+		// Если тип равняеться primary, то добавляем следующие стили
+		if (props.type === "primary") {
 			return `
                 padding: 12px 30px;
                 background: #0061df;
@@ -41,7 +42,9 @@ export const ButtonStyle = styled.button`
                     background-color: #1053a9;
                 }
             `;
-		} else if (props.type === "white") {
+		}
+		// Если тип равняеться secondary, то добавляем следующие стили
+		else if (props.type === "secondary") {
 			return `
                 border: 1px solid #e6e9ec;
                 background-color: transparent;
@@ -52,7 +55,9 @@ export const ButtonStyle = styled.button`
                     background-color: #d7cdcd;
                 }
             `;
-		} else {
+		}
+		// Иначе добавляем следующие стили
+		else {
 			return `
                 border: 1px solid #ffffff;
                 background-color: transparent;

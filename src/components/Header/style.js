@@ -1,6 +1,10 @@
 import styled, { keyframes } from "styled-components";
 import { rem, em } from "../../helpers/functions/functions";
 
+/*------------------------------------*/
+
+/* Анимация открытия и закрытия меню бургер */
+
 const burgtop = keyframes`
 	0% {
 	}
@@ -71,8 +75,15 @@ const burgbottomReset = keyframes`
 	}
 `;
 
+/*------------------------------------*/
+
 export const HeaderStyle = styled.header`
 	background-color: #0d263b;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 9999;
 	.header__container {
 		display: flex;
 		justify-content: space-between;
@@ -124,7 +135,7 @@ export const HeaderStyle = styled.header`
 	}
 	.header__link {
 		color: #fff;
-		margin: 0px ${rem(32)};
+		margin: 0px ${rem(32, 16)};
 		line-height: ${24 / 16};
 		transition: all 0.3s ease 0s;
 		position: relative;
@@ -207,7 +218,7 @@ export const HeaderStyle = styled.header`
 			transition: all 0.4s ease 0s;
 		}
 		.header__link {
-			margin: 0px 0px ${rem(15)} 0px;
+			margin: 0px 0px ${em(15, 30)} 0px;
 			font-size: ${rem(30)};
 		}
 		.header__burger {

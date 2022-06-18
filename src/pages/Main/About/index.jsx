@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { AboutStyle } from "./style";
-import { aboutSlides } from "../../../helpers/mock/mock";
+import { aboutSlides } from "../../../helpers/utils/aboutSlides";
 import { isMobile } from "../../../helpers/functions/functions";
 import { useMatchMedia } from "../../../helpers/functions/functions";
 import Filter from "../../../components/Filter";

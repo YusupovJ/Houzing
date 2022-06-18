@@ -5,13 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import "swiper/css";
 
 /*------------------------------------*/
+
 import Root from "./root";
-import "./styles/style.scss";
+import GlobalContext from "./helpers/context/store";
+import "./assets/styles/style.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
 	<BrowserRouter>
-		<Root />
-	</BrowserRouter>,
+		<GlobalContext>
+			<Root />
+		</GlobalContext>
+	</BrowserRouter>
 );

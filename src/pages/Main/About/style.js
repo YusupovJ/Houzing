@@ -24,20 +24,10 @@ export const AboutStyle = styled.section`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		filter: brightness(35%);
 	}
 	.about__slide-item {
 		position: relative;
-		&::before {
-			content: "";
-			position: absolute;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			background-color: #00000087;
-			width: 100%;
-			height: 100%;
-			display: inline-block;
-		}
 	}
 	.about__title {
 		font-weight: 700;
@@ -45,15 +35,15 @@ export const AboutStyle = styled.section`
 		line-height: 109%;
 		letter-spacing: -0.02em;
 		color: #ffffff;
-		margin: 0px 0px ${rem(8)} 0px;
+		margin: 0px 0px ${em(8, 44)} 0px;
 	}
 	.about__text {
 		color: #fff;
 		line-height: 150%;
-		margin: 0px 0px ${rem(24)} 0px;
+		margin: 0px 0px ${em(24, 16)} 0px;
 	}
 	.about__ownerships {
-		margin: 0px 0px ${rem(24)} 0px;
+		margin: 0px 0px 24px 0px;
 		display: flex;
 		gap: 20px;
 	}
@@ -69,7 +59,7 @@ export const AboutStyle = styled.section`
 		}
 	}
 	.about__price {
-		margin: 0px 0px ${rem(48)} 0px;
+		margin: 0px 0px ${em(48, 28)} 0px;
 		color: #fff;
 		font-size: ${rem(28)};
 		font-weight: 600;
@@ -170,13 +160,13 @@ export const AboutStyle = styled.section`
 		.about__ownerships {
 			flex-wrap: wrap;
 			justify-content: center;
-			margin: 0px 0px ${rem(16)} 0px;
+			margin: 0px 0px 16px 0px;
 		}
 		.about__price {
-			margin: 0px 0px ${rem(24)} 0px;
+			margin: 0px 0px ${em(24, 28)} 0px;
 		}
 		.about__container {
-			margin: 0px auto 142px auto;
+			margin: 0px auto 142px;
 		}
 	}
 `;

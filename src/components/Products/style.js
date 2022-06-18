@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { em } from "../../helpers/functions/functions";
 
 export const ProductsStyle = styled.section`
-	padding: 96px 0px 48px;
+	padding: 96px 0px 96px;
+	background-color: ${(props) => props.bg};
 	.swiper-pagination-bullet {
 		background: #0061df;
 		border: 2px solid #fff;
@@ -18,11 +19,13 @@ export const ProductsStyle = styled.section`
 		border: 2px solid #0061df;
 		background-color: #fff;
 	}
-	.swiper-pagination-bullet-active-next,
-	.swiper-pagination-bullet-active-next-next,
 	.swiper-pagination-bullet-active-prev,
+	.swiper-pagination-bullet-active-next {
+		transform: scale(0.8);
+	}
+	.swiper-pagination-bullet-active-next-next,
 	.swiper-pagination-bullet-active-prev-prev {
-		transform: scale(1);
+		transform: scale(0.7);
 	}
 	.swiper {
 		padding: 0px 0px 65px 0px;
@@ -35,7 +38,7 @@ export const ProductsStyle = styled.section`
 			width: 100vw;
 			height: 100%;
 			position: absolute;
-			background-color: #fff;
+			background-color: ${(props) => props.bg};
 			top: 0;
 		}
 		&::before {
@@ -48,6 +51,9 @@ export const ProductsStyle = styled.section`
 			z-index: 10;
 			right: 0;
 		}
+	}
+	.swiper-wrapper {
+		align-items: stretch;
 	}
 	.swiper-button-prev,
 	.swiper-button-next {
@@ -111,7 +117,16 @@ export const ProductsStyle = styled.section`
 			}
 		}
 	}
-	@media only screen and (max-width: ${em(767.98)}) {
-		padding: 64px 0px 32px;
+	@media only screen and (min-width: ${em(1439.98)}) {
+		.swiper-pagination {
+			display: ${(props) =>
+				props.pagination === false ? "none" : "block"};
+		}
+	}
+	@media only screen and (max-width: ${em(1023.98)}) {
+		padding: 32px 0px 32px;
+	}
+	@media only screen and (max-width: ${em(992.98)}) {
+		padding: 64px 0px 64px;
 	}
 `;

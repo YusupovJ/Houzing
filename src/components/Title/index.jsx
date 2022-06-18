@@ -1,6 +1,8 @@
 import React from "react";
 import { TitleStyled } from "./style";
 
+// Шаблон для заголовка
+
 const Title = (props) => {
 	return (
 		<TitleStyled className={`${props.className} text-block`}>
