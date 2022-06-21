@@ -10,7 +10,9 @@ const url = process.env.REACT_APP_PUBLIC_URL;
 
 const Properties = (props) => {
 	const [cards, setCards] = useState([]);
+	const [cardsMaxLength, setCardsMaxLength] = useState(15);
 
+	// Запрос на сервак
 	useEffect(() => {
 		const request = fetch(`${url}/v1/houses/list`).then((response) =>
 			response.json()
@@ -24,6 +26,11 @@ const Properties = (props) => {
 				console.error(err);
 			});
 	}, []);
+
+	// Добавляем по 15 карточек при нажатии кнопки showMore
+	const showMore = () => {
+		setCardsMaxLength(cardsMaxLength + 16);
+	};
 
 	return (
 		<PropertiesStyle className="properties">
@@ -39,16 +46,18 @@ const Properties = (props) => {
 					</p>
 					<div className="results__cards">
 						{cards.length !== 0 ? (
-							cards.map((card) => {
+							// Показываем первые cardsMaxLength карточек
+							cards.slice(0, cardsMaxLength).map((card) => {
 								return (
 									<Card
 										key={card.id}
 										address={card.address}
-										title={card.name}
-										image={card.attachments[0].imgPath}
+										title={card.description}
+										image={card.attachments[0]?.imgPath}
 										houseDetails={card.houseDetails}
 										sale={card.salePrice}
 										price={card.price}
+										favourite={card.favorite}
 									/>
 								);
 							})
@@ -57,9 +66,16 @@ const Properties = (props) => {
 						)}
 					</div>
 				</div>
-				<Button type="primary" className="results__button">
-					<p>Show More</p>
-				</Button>
+				{/* Если количество карточек меньше ограничения, то не показываем кнопку */}
+				{cards.length <= cardsMaxLength ? null : (
+					<Button
+						type="primary"
+						onClick={showMore}
+						className="results__button"
+					>
+						<p>Show More</p>
+					</Button>
+				)}
 			</section>
 		</PropertiesStyle>
 	);

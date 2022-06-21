@@ -144,6 +144,15 @@ export const CardStyle = styled.div`
 		:active {
 			transform: scale(0.8);
 		}
+		&.fav {
+			background: #cc5040;
+			svg {
+				fill: #fff;
+			}
+			&:hover {
+				background: #f8432b;
+			}
+		}
 	}
 	.card__zoom {
 		display: flex;

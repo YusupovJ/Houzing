@@ -1,15 +1,19 @@
 import styled from "styled-components";
-import { em, rem } from "../../helpers/functions/functions";
+import { em, per, rem } from "../../helpers/functions/functions";
 
 export const PropertiesStyle = styled.main`
 	.results__text-block {
 		margin: 64px 0px 70px;
 	}
+	.results__container {
+		max-width: 1190px;
+		padding: 0px 5px;
+	}
 	.results__cards {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 20px 1%;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+		gap: 20px ${per(20, 1180)};
+		margin: 0px 0px 48px 0px;
 	}
 	.results__count {
 		font-size: ${rem(14)};
@@ -21,17 +25,13 @@ export const PropertiesStyle = styled.main`
 		}
 	}
 	.results__button {
-		margin: 48px auto 96px;
+		margin: 0px auto 96px;
 		padding: 12px 84px;
-	}
-	.card {
-		flex: 0 1 380px;
 	}
 	.results__loading {
 		width: 100px;
 		height: 100px;
-		margin: 0px auto;
-		margin: 0px 0px 200px 0px;
+		margin: 0px auto 200px;
 	}
 	@media only screen and (max-width: ${em(767.98)}) {
 		.results__text-block {
@@ -45,7 +45,7 @@ export const PropertiesStyle = styled.main`
 			transform: translate(0, 0);
 		}
 		.results__button {
-			margin: 24px auto 64px;
+			margin: 0px auto 64px;
 		}
 	}
 `;

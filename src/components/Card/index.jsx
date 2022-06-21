@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardStyle } from "./style";
 import notAvailable from "../../assets/img/notAvailable.png";
 import user from "../../assets/svg/user.svg";
@@ -11,7 +11,18 @@ import { ReactComponent as Rule } from "../../assets/svg/rule.svg";
 
 /* Это шаблон карточки товара */
 
-const Card = ({ image, ava, title, address, houseDetails, price, sale }) => {
+const Card = ({
+	image,
+	ava,
+	title,
+	address,
+	houseDetails,
+	price,
+	sale,
+	favourite,
+}) => {
+	const [favourited, setFavourited] = useState(favourite ? true : false);
+
 	return (
 		<CardStyle className="card">
 			<div className="card__type card__type_featured">Featured</div>
@@ -53,7 +64,10 @@ const Card = ({ image, ava, title, address, houseDetails, price, sale }) => {
 					<button className="card__zoom">
 						<Zoom />
 					</button>
-					<button className="card__fav">
+					<button
+						className={`card__fav ${favourited ? "fav" : ""}`}
+						onClick={() => setFavourited(!favourited)}
+					>
 						<Favourite />
 					</button>
 				</div>
