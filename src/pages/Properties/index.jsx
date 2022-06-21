@@ -42,7 +42,8 @@ const Properties = (props) => {
 						consectetur sit.
 					</Title>
 					<p className="results__count">
-						{cards.length} <span>results</span>
+						{cards.length}
+						<span>results</span>
 					</p>
 					<div className="results__cards">
 						{cards.length !== 0 ? (
