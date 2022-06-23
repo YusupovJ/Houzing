@@ -6,6 +6,7 @@ import Card from "../../components/Card";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
+import { ReactComponent as RequestNotFound } from "../../assets/svg/requestNotFound.svg";
 
 const url = process.env.REACT_APP_PUBLIC_URL;
 
@@ -21,7 +22,7 @@ const Properties = (props) => {
 		);
 		request
 			.then((data) => {
-				setCards(data.data || []);
+				setCards(data.data || ["nothing"]);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -43,18 +44,36 @@ const Properties = (props) => {
 						consectetur sit.
 					</Title>
 					<p className="results__count">
-						{cards.length}
+						{cards[0] === "nothing" ? 0 : cards.length}
 						<span> results</span>
 					</p>
 					<div className="results__cards">
-						{cards.length !== 0 ? (
+						{/* 
+							пока данные приходят с сервера выводим загрузку, потом данные.
+							Но если нет данных то выводим, что ничего не найдено
+						*/}
+						{cards[0] === "nothing" ? (
+							<div className="results__not-found">
+								<RequestNotFound />
+								<h3>
+									Nothing was found for your request {"("}
+								</h3>
+							</div>
+						) : cards.length !== 0 ? (
 							// Показываем первые cardsMaxLength карточек
 							cards.slice(0, cardsMaxLength).map((card) => {
 								return (
 									<Card
 										key={card.id}
-										address={card.address}
-										title={card.description}
+										address={[
+											card.country,
+											card.region,
+											card.city,
+											card.address,
+										]
+											.filter((item) => item)
+											.join(",")}
+										title={card.name || "none"}
 										image={card.attachments[0]?.imgPath}
 										houseDetails={card.houseDetails}
 										sale={card.salePrice}

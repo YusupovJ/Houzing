@@ -24,6 +24,23 @@ export const PropertiesStyle = styled.main`
 			color: #696969;
 		}
 	}
+	.results__not-found {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		svg {
+			margin: 0px 0px 0px 0px;
+			width: 100px;
+			height: 100px;
+			fill: #696969;
+		}
+		h3 {
+			font-family: "Cerebri Sans";
+			font-size: ${rem(20)};
+			color: #696969;
+			font-weight: 600;
+		}
+	}
 	.results__button {
 		margin: 0px auto 96px;
 		padding: 12px 84px;

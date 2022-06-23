@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { FilterStyle } from "./style";
 import Button from "../Button";
 import { popoverData } from "../../helpers/utils/popoverData";
@@ -16,13 +16,17 @@ import { ReactComponent as Advanced } from "../../assets/svg/advanced.svg";
 const Filter = (props) => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const urlSearch = new URLSearchParams(location.search, [location.search]);
 
 	const [popover, setPopover] = useState(false);
+	const [searchKeys, setSearchKeys] = useState({});
+
+	useEffect(() => {
+		navigate(`${location.pathname}`);
+	}, [navigate, location.pathname]);
 
 	// Открытие поповера
 	const togglePopover = (e) => {
-		// Если кликнута кнопка, то
+		// Если кликнута кнопка, то тоглиться поповер
 		if (e.target.closest(".filter__button")) {
 			setPopover(!popover);
 		}
@@ -45,21 +49,28 @@ const Filter = (props) => {
 	document.body.addEventListener("click", togglePopover);
 
 	/*------------------------------------*/
-
 	// Поиск
-	const getSearch = (e) => {
-		const url = new URL(window.location.href);
+
+	// Формируем объект из name и value
+	const getURLSearch = (e) => {
 		const { value, name } = e.target;
+		setSearchKeys({ ...searchKeys, [name]: value });
+	};
 
-		// Изменяем url, добавляя ?имя=значение
-		url.searchParams.set(name, value);
-
-		// Если значения нет то удалаяем
-		if (!value) {
-			url.searchParams.delete(name);
+	// Переводим в такую запись ?name=value&name2=value2
+	const urlSearchToString = (obj) => {
+		let urlString = "?";
+		for (let key in obj) {
+			if (obj[key] !== "") {
+				urlString += `${key}=${obj[key]}&`;
+			}
 		}
+		return urlString.slice(0, -1);
+	};
 
-		navigate(url.search);
+	// Отправляем данные на сервер
+	const submit = (e) => {
+		navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
 	};
 
 	return (
@@ -68,12 +79,9 @@ const Filter = (props) => {
 				<input
 					type="text"
 					className="filter__input"
-					placeholder="Enter an address or Zip Code"
-					// Если при заходе на сайт что-то есть в urlSearch
-					// то изменяем его на это значение, иначе ""
-					value={urlSearch.get("address") || ""}
-					name="address"
-					onChange={getSearch}
+					placeholder="Enter a name"
+					name="house_name"
+					onChange={getURLSearch}
 				/>
 				<div type="secondary" className="filter__advanced">
 					<Button type="secondary" className="filter__button">
@@ -81,7 +89,11 @@ const Filter = (props) => {
 						<p>Advanced</p>
 					</Button>
 				</div>
-				<Button type="primary" className="filter__submit">
+				<Button
+					type="primary"
+					onClick={submit}
+					className="filter__submit"
+				>
 					<SearchIcon />
 					<p>Search</p>
 				</Button>
@@ -99,15 +111,8 @@ const Filter = (props) => {
 												<input
 													type="text"
 													key={input.id}
-													// Если при заходе на сайт что-то есть в urlSearch
-													// то изменяем его на это значение, иначе ""
-													value={
-														urlSearch.get(
-															input.name
-														) || ""
-													}
 													name={input.name}
-													onChange={getSearch}
+													onBlur={getURLSearch}
 													placeholder={
 														input.placeholder
 													}
@@ -126,7 +131,11 @@ const Filter = (props) => {
 						>
 							<p>Cansel</p>
 						</Button>
-						<Button type="primary" className="popover__button">
+						<Button
+							onClick={submit}
+							type="primary"
+							className="popover__button"
+						>
 							<p>Submit</p>
 						</Button>
 					</div>
