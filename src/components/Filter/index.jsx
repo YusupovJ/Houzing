@@ -6,12 +6,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 /* Это компонент фильтра */
 
-/*-----------------------------------*/
+/*------------------------------------*/
 
 import { ReactComponent as SearchIcon } from "../../assets/svg/search.svg";
 import { ReactComponent as Advanced } from "../../assets/svg/advanced.svg";
 
-/*-----------------------------------*/
+/*------------------------------------*/
 
 const Filter = (props) => {
 	const location = useLocation();
