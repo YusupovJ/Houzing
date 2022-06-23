@@ -25,7 +25,7 @@ export const FilterStyle = styled.section`
 			box-shadow: 0px 3px 4px 0px #d3d1d1;
 		}
 	}
-	.filter__filter {
+	.filter__advanced {
 		flex: 1 1;
 		overflow: visible;
 		position: relative;
@@ -54,6 +54,8 @@ export const FilterStyle = styled.section`
 	.popover__body {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
+		border: 1px solid #e6e9ec;
+		border-bottom: none;
 		padding: 10px 10px 20px 30px;
 		background-color: #fff;
 	}
@@ -90,6 +92,8 @@ export const FilterStyle = styled.section`
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 		background: #f6f8f9;
+		border: 1px solid #e6e9ec;
+		border-top: none;
 	}
 
 	.popover__button {

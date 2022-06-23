@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PropertiesStyle } from "./style";
+import { useLocation } from "react-router-dom";
 import Filter from "../../components/Filter";
 import Card from "../../components/Card";
 import Title from "../../components/Title";
@@ -9,23 +10,23 @@ import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
 const url = process.env.REACT_APP_PUBLIC_URL;
 
 const Properties = (props) => {
+	let location = useLocation();
 	const [cards, setCards] = useState([]);
 	const [cardsMaxLength, setCardsMaxLength] = useState(15);
 
 	// Запрос на сервак
 	useEffect(() => {
-		const request = fetch(`${url}/v1/houses/list`).then((response) =>
-			response.json()
+		const request = fetch(`${url}/v1/houses/list${location.search}`).then(
+			(response) => response.json()
 		);
 		request
 			.then((data) => {
-				setCards(data.data);
-				console.log(data.data);
+				setCards(data.data || []);
 			})
 			.catch((err) => {
 				console.error(err);
 			});
-	}, []);
+	}, [location.search]);
 
 	// Добавляем по 15 карточек при нажатии кнопки showMore
 	const showMore = () => {
@@ -43,7 +44,7 @@ const Properties = (props) => {
 					</Title>
 					<p className="results__count">
 						{cards.length}
-						<span>results</span>
+						<span> results</span>
 					</p>
 					<div className="results__cards">
 						{cards.length !== 0 ? (
