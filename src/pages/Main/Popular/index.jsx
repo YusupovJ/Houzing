@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { PopularStyle } from "./style";
 import Button from "../../../components/Button";
 import popBg from "../../../assets/img/popBg.jpg";
@@ -20,4 +20,4 @@ const Popular = (props) => {
 	);
 };
 
-export default Popular;
+export default memo(Popular);

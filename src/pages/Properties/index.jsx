@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { PropertiesStyle } from "./style";
 import { useLocation } from "react-router-dom";
 import Filter from "../../components/Filter";
@@ -49,7 +49,7 @@ const Properties = (props) => {
 					</p>
 					<div className="results__cards">
 						{/* 
-							пока данные приходят с сервера выводим загрузку, потом данные.
+							Пока данные приходят с сервера выводим загрузку, потом данные.
 							Но если нет данных то выводим, что ничего не найдено
 						*/}
 						{cards[0] === "nothing" ? (
@@ -102,4 +102,4 @@ const Properties = (props) => {
 	);
 };
 
-export default Properties;
+export default memo(Properties);

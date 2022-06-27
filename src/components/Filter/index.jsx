@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { FilterStyle } from "./style";
 import Button from "../Button";
 import { popoverData } from "../../helpers/utils/popoverData";
@@ -20,11 +20,24 @@ const Filter = (props) => {
 	const [popover, setPopover] = useState(false);
 	const [searchKeys, setSearchKeys] = useState({});
 
-	useEffect(() => {
-		navigate(`${location.pathname}`);
-	}, [navigate, location.pathname]);
+	/* -------------------------------- */
+	// Очистка url после перезагрузки страницы
 
+	window.onload = function () {
+		let loaded = sessionStorage.getItem("loaded");
+		if (loaded) {
+			reloaded();
+		} else {
+			sessionStorage.setItem("loaded", true);
+		}
+	};
+
+	const reloaded = () => {
+		navigate(`${location.pathname}`);
+	};
+	/* -------------------------------- */
 	// Открытие поповера
+
 	const togglePopover = (e) => {
 		// Если кликнута кнопка, то тоглиться поповер
 		if (e.target.closest(".filter__button")) {
@@ -48,7 +61,7 @@ const Filter = (props) => {
 	};
 	document.body.addEventListener("click", togglePopover);
 
-	/*------------------------------------*/
+	/* -------------------------------- */
 	// Поиск
 
 	// Формируем объект из name и value
@@ -70,8 +83,15 @@ const Filter = (props) => {
 
 	// Отправляем данные на сервер
 	const submit = (e) => {
-		navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
+		// Если находимся на главной странице то переходим в properties
+		if (location.pathname === "/") {
+			navigate(`/properties${urlSearchToString(searchKeys)}`);
+		} else {
+			navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
+		}
 	};
+
+	/* -------------------------------- */
 
 	return (
 		<FilterStyle className="filter">
@@ -81,7 +101,7 @@ const Filter = (props) => {
 					className="filter__input"
 					placeholder="Enter a name"
 					name="house_name"
-					onChange={getURLSearch}
+					onBlur={getURLSearch}
 				/>
 				<div type="secondary" className="filter__advanced">
 					<Button type="secondary" className="filter__button">
@@ -129,7 +149,7 @@ const Filter = (props) => {
 							type="secondary"
 							className="popover__button popover__button_cansel"
 						>
-							<p>Cansel</p>
+							<p>Cancel</p>
 						</Button>
 						<Button
 							onClick={submit}

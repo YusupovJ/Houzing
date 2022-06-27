@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { FooterStyle } from "./style";
 import { footer } from "../../helpers/utils/footer";
@@ -72,4 +72,4 @@ const Footer = (props) => {
 	);
 };
 
-export default Footer;
+export default memo(Footer);

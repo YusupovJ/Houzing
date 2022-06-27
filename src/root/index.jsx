@@ -1,10 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import Header from "../components/Header";
 import { Routes, Route } from "react-router-dom";
 import Main from "../pages/Main";
 import Footer from "../components/Footer";
 import Properties from "../pages/Properties";
 import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
 
 const Root = (props) => {
 	return (
@@ -13,6 +14,7 @@ const Root = (props) => {
 			<Routes>
 				<Route path="/" element={<Main />} />
 				<Route path="/properties" element={<Properties />} />
+				<Route path="/login" element={<Login />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<Footer />
@@ -20,4 +22,4 @@ const Root = (props) => {
 	);
 };
 
-export default Root;
+export default memo(Root);
