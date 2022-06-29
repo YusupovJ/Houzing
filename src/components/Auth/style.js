@@ -44,6 +44,13 @@ export const AuthStyle = styled.main`
 		&.err {
 			border-bottom: 2px solid red;
 		}
+		&_password {
+			font-family: text-security-disc;
+			color: #818f9b;
+			&::placeholder {
+				font-family: Montserrat;
+			}
+		}
 	}
 	.auth__action {
 		display: flex;

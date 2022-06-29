@@ -3,6 +3,10 @@
 /* Подключение шрифтов ======================================================================= */
 // &display=swap - поддержка кирилицы
 @import "https://fonts.googleapis.com/css?family=Montserrat:regular,600,700&display=swap";
+@font-face{
+  font-family: text-security-disc;
+  src: url("https://raw.githubusercontent.com/noppa/text-security/master/dist/text-security-disc.woff");
+}
 
 /* Подключение файлом */ //(если есть)
 @import "./fonts";

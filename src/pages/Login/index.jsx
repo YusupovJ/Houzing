@@ -8,10 +8,11 @@ const url = process.env.REACT_APP_PUBLIC_URL;
 const Login = (props) => {
 	const navigate = useNavigate();
 	const checkRef = useRef();
+	const userInfo = JSON.parse(localStorage.getItem("userData"));
 
 	// Для будущей проверки при нажатии на кнопку submit
 	const [userData, setUserData] = useState({
-		email: "",
+		email: userInfo?.username || "",
 		password: "",
 	});
 
@@ -33,6 +34,7 @@ const Login = (props) => {
 			userDataClone.password = e.target.value;
 		}
 		setUserData(userDataClone);
+		console.log(userData);
 	};
 
 	/*------------------------------------*/
@@ -40,8 +42,7 @@ const Login = (props) => {
 	// Отправка формы
 	const submit = (e) => {
 		// RegEx
-		let emailReg =
-			/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		let emailReg = /.+@.+\.\w+/;
 		let passwordReg = /[\w,\s]{6,20}/;
 
 		// Если совпадения есть то отправляем запрос
@@ -66,18 +67,10 @@ const Login = (props) => {
 
 			// Загружаем в локал сторейдж данные.Стираем имя если не нажат чекбокс
 			request.then((res) => {
+				const saved = Object.assign({}, res, { checked: true });
 				localStorage.setItem(
 					"userData",
-					JSON.stringify(
-						checkRef.current.checked
-							? res
-							: {
-									authenticationToken:
-										res.authenticationToken,
-									expirationData: res.expirationData,
-									refreshToken: res.refreshToken,
-							  }
-					)
+					JSON.stringify(checkRef.current.checked ? saved : res)
 				);
 				// Редирект на главную страницу
 				navigate("/");
@@ -99,12 +92,9 @@ const Login = (props) => {
 				type="email"
 				placeholder="Email"
 				className={`auth__input ${access.email ? "" : "err"}`}
-				name="email"
 				autoComplete="off"
 				// Если сохранился, ставим в инпут
-				defaultValue={
-					JSON.parse(localStorage.getItem("userData"))?.username
-				}
+				defaultValue={userInfo?.checked ? userInfo?.username : ""}
 				// При введении данных убираем warning
 				onChange={() =>
 					setAccess({ password: access.password, email: true })
@@ -112,9 +102,10 @@ const Login = (props) => {
 				onBlur={(e) => getUserData(e, "email")}
 			/>
 			<input
-				type="password"
-				className={`auth__input ${access.password ? "" : "err"}`}
-				name="password"
+				type="text"
+				className={`auth__input auth__input_password ${
+					access.password ? "" : "err"
+				}`}
 				placeholder="Password"
 				autoComplete="off"
 				// При введении данных убираем warning

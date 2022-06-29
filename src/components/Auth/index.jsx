@@ -5,7 +5,7 @@ import { AuthStyle } from "./style";
 
 const Auth = (props) => {
 	return (
-		<AuthStyle className="auth">
+		<AuthStyle className="auth" method="post">
 			<div className="auth__container">
 				<div className="auth__wrapper">
 					<h1 className="auth__title">{props.title}</h1>

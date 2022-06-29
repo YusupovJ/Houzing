@@ -12,10 +12,13 @@ import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
 import { navbar } from "../../helpers/utils/navbar";
 import Button from "../Button";
 
+const url = process.env.REACT_APP_PUBLIC_URL;
+
 const Header = (props) => {
 	const header = useRef();
 	const navigate = useNavigate();
 	const [menu, setMenu] = useState(false);
+	const userInfo = JSON.parse(localStorage.getItem("userData")) || {};
 
 	// Если высота устройства меньше 768px, а ширина больше 768px,
 	// то если меню будет открыто в вертикальном положении и пользователь перевернет
@@ -36,6 +39,29 @@ const Header = (props) => {
 		setMenu(!menu);
 		if (menu === true) document.body.classList.remove("lock");
 		else document.body.classList.add("lock");
+	};
+
+	// Выход из аккаунта
+	const logout = () => {
+		const request = fetch(`${url}/public/logout`, {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({
+				refreshToken: userInfo?.refreshToken,
+				username: userInfo?.username,
+			}),
+		}).then((res) => res);
+		request.then((data) => {
+			localStorage.setItem(
+				"userData",
+				JSON.stringify({
+					username: userInfo?.username,
+					checked: userInfo?.checked || false,
+				})
+			);
+		});
 	};
 
 	return (
@@ -81,16 +107,23 @@ const Header = (props) => {
 					Так как Button это компонент мы не можем сделать его Link.
 					Поэтом используем navigate
 				*/}
-				<Button
-					onClick={() => navigate("/login")}
-					className="header__login"
-				>
-					<p>Login</p>
-					<Login className="header__login-icon" />
-				</Button>
+				{userInfo?.authenticationToken ? (
+					<Button onClick={logout} className="header__login">
+						<p>Logout</p>
+						<Login className="header__login-icon" />
+					</Button>
+				) : (
+					<Button
+						onClick={() => navigate("/login")}
+						className="header__login"
+					>
+						<p>Login</p>
+						<Login className="header__login-icon" />
+					</Button>
+				)}
 			</div>
 		</HeaderStyle>
 	);
 };
 
-export default memo(Header);
+export default Header;
