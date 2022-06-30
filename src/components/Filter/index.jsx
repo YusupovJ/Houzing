@@ -67,6 +67,7 @@ const Filter = (props) => {
 	// Формируем объект из name и value
 	const getURLSearch = (e) => {
 		const { value, name } = e.target;
+		console.log(value, name);
 		setSearchKeys({ ...searchKeys, [name]: value });
 	};
 
@@ -102,6 +103,7 @@ const Filter = (props) => {
 					placeholder="Enter a name"
 					name="house_name"
 					onBlur={getURLSearch}
+					autoComplete="off"
 				/>
 				<div type="secondary" className="filter__advanced">
 					<Button type="secondary" className="filter__button">
@@ -131,6 +133,7 @@ const Filter = (props) => {
 												<input
 													type="text"
 													key={input.id}
+													autoComplete="off"
 													name={input.name}
 													onBlur={getURLSearch}
 													placeholder={

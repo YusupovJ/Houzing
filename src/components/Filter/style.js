@@ -109,12 +109,10 @@ export const FilterStyle = styled.section`
 		transform: translate(-50%, 0);
 		max-width: 600px;
 		width: 100%;
-		margin: 0px auto;
 		.filter__container {
 			border-radius: 3px;
 			flex-wrap: wrap;
 			background-color: #fff;
-			margin: 0px 16px;
 			box-sizing: content-box;
 		}
 		.filter__input {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { rem } from "../../helpers/functions/functions";
+import { em, rem } from "../../helpers/functions/functions";
 
 export const AuthStyle = styled.main`
 	.auth__container {
@@ -81,6 +81,11 @@ export const AuthStyle = styled.main`
 		color: #0061df;
 		:hover {
 			color: #3d84e1;
+		}
+	}
+	@media only screen and (max-width: ${em(767.98)}) {
+		.auth__wrapper {
+			padding: 30px 15px;
 		}
 	}
 `;

@@ -24,12 +24,17 @@ export const PropertiesStyle = styled.main`
 			color: #696969;
 		}
 	}
+	.results__button {
+		margin: 0px auto 96px;
+		padding: 12px 84px;
+	}
 	.results__not-found {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		text-align: center;
+		margin: 0px 0px 104.5px 0px;
 		svg {
-			margin: 0px 0px 0px 0px;
 			width: 100px;
 			height: 100px;
 			fill: #696969;
@@ -41,14 +46,10 @@ export const PropertiesStyle = styled.main`
 			font-weight: 600;
 		}
 	}
-	.results__button {
-		margin: 0px auto 96px;
-		padding: 12px 84px;
-	}
 	.results__loading {
 		width: 100px;
 		height: 100px;
-		margin: 0px auto 200px;
+		margin: 0px auto 130px;
 	}
 	@media only screen and (max-width: ${em(767.98)}) {
 		.results__text-block {
