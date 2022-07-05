@@ -47,6 +47,7 @@ export const AuthStyle = styled.main`
 		&_password {
 			font-family: text-security-disc;
 			color: #818f9b;
+			-webkit-text-security: disc;
 			&::placeholder {
 				font-family: Montserrat;
 			}

@@ -105,6 +105,7 @@ export const FilterStyle = styled.section`
 		z-index: 2;
 		bottom: 62px;
 		left: 50%;
+		margin: 0px auto;
 		gap: 24px 21px;
 		transform: translate(-50%, 0);
 		max-width: 600px;
@@ -114,6 +115,7 @@ export const FilterStyle = styled.section`
 			flex-wrap: wrap;
 			background-color: #fff;
 			box-sizing: content-box;
+			margin: 0px 10px;
 		}
 		.filter__input {
 			flex: 1 1 100%;

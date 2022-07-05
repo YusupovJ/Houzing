@@ -11,39 +11,62 @@ import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
 
 import { navbar } from "../../helpers/utils/navbar";
 import Button from "../Button";
+import UserInfo from "./UserInfo";
 
 const url = process.env.REACT_APP_PUBLIC_URL;
 
 const Header = (props) => {
 	const header = useRef();
-	const navigate = useNavigate();
-	const [menu, setMenu] = useState(false);
-	const userInfo = JSON.parse(localStorage.getItem("userData")) || {};
 
-	// Если высота устройства меньше 768px, а ширина больше 768px,
-	// то если меню будет открыто в вертикальном положении и пользователь перевернет
-	// телефон на горизонтальное положение, то у body останется класс lock
-	if (document.documentElement.clientWidth > 768 && menu) {
-		setMenu(false);
+	const navigate = useNavigate();
+
+	const [burger, setBurger] = useState(false);
+	const [popover, setPopover] = useState(false);
+
+	const userInfo = JSON.parse(localStorage.getItem("login")) || {};
+
+	/*------------------------------------*/
+
+	/* 
+        Если высота устройства меньше 768px, а ширина больше 768px,
+	    то если меню будет открыто в вертикальном положении и пользователь перевернет
+	    телефон на горизонтальное положение, то у body останется класс lock
+    */
+	if (document.documentElement.clientWidth > 768 && burger) {
+		setBurger(false);
 		document.body.classList.remove("lock");
 	}
 
-	// При переходе на другую страницу закрываем меню бургер
+	/*------------------------------------*/
+
 	const closeBurgerOnRedirect = () => {
-		setMenu(false);
+		setBurger(false);
 		document.body.classList.remove("lock");
 	};
 
-	// Открытие и закрытие меню бургер
 	const toggleBurger = () => {
-		setMenu(!menu);
-		if (menu === true) document.body.classList.remove("lock");
+		setBurger(!burger);
+		if (burger === true) document.body.classList.remove("lock");
 		else document.body.classList.add("lock");
 	};
 
-	// Выход из аккаунта
-	const logout = () => {
-		const request = fetch(`${url}/public/logout`, {
+	/*------------------------------------*/
+
+	const togglePopover = (e) => {
+		if (e.target.closest(".user-info__button")) {
+			setPopover(!popover);
+		} else if (e.target.closest(".user-info__wrapper")) {
+			setPopover(true);
+		} else {
+			setPopover(false);
+		}
+	};
+	document.body.addEventListener("click", togglePopover);
+
+	/*------------------------------------*/
+
+	const logout = async () => {
+		await fetch(`${url}/public/logout`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -52,16 +75,17 @@ const Header = (props) => {
 				refreshToken: userInfo?.refreshToken,
 				username: userInfo?.username,
 			}),
-		}).then((res) => res);
-		request.then((data) => {
-			localStorage.setItem(
-				"userData",
-				JSON.stringify({
-					username: userInfo?.username,
-					checked: userInfo?.checked || false,
-				})
-			);
 		});
+
+		localStorage.setItem(
+			"login",
+			JSON.stringify({
+				username: userInfo?.username,
+				checked: userInfo?.checked || false,
+			})
+		);
+
+		window.location.href = window.location.href;
 	};
 
 	return (
@@ -77,7 +101,7 @@ const Header = (props) => {
 				</Link>
 				<nav
 					className={`header__navigator ${
-						menu === true ? "toggled" : "unToggled"
+						burger === true ? "toggled" : "unToggled"
 					}`}
 				>
 					<div className="header__nav-body">
@@ -97,21 +121,17 @@ const Header = (props) => {
 					<div
 						onClick={toggleBurger}
 						className={`header__burger ${
-							menu === true ? "toggled" : "unToggled"
+							burger === true ? "toggled" : "unToggled"
 						}`}
 					>
 						<div></div>
 					</div>
 				</nav>
-				{/* 
-					Так как Button это компонент мы не можем сделать его Link.
-					Поэтом используем navigate
-				*/}
+
+				{/* Если пользователь вошел в аккаунт то показываем его информацию, иначе кнопку Login */}
+
 				{userInfo?.authenticationToken ? (
-					<Button onClick={logout} className="header__login">
-						<p>Logout</p>
-						<Login className="header__login-icon" />
-					</Button>
+					<UserInfo popover={popover} logout={logout} />
 				) : (
 					<Button
 						onClick={() => navigate("/login")}
@@ -126,4 +146,4 @@ const Header = (props) => {
 	);
 };
 
-export default Header;
+export default memo(Header);

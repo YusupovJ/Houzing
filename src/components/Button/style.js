@@ -1,5 +1,55 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { rem } from "../../helpers/functions/functions";
+
+const PrimaryButton = css`
+	background: #0061df;
+	border: 1px solid #0061df;
+	p {
+		color: #ffffff;
+	}
+	&:hover {
+		background-color: #1053a9;
+	}
+`;
+
+const SecondaryButton = css`
+	border: 1px solid #e6e9ec;
+	background-color: transparent;
+	p {
+		color: #0d263b;
+	}
+	&:hover {
+		background-color: #d7cdcd;
+	}
+`;
+
+const DefaultButton = css`
+	border: 1px solid #ffffff;
+	background-color: transparent;
+	p {
+		color: #fff;
+	}
+	&::before {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		transition: all 0.6s ease 0s;
+		left: 0;
+		transform: skew(-20deg) translate(-120%, 0);
+		width: 120%;
+		height: 100%;
+		background-color: #fff;
+	}
+	&:hover {
+		p {
+			color: #0d263b;
+		}
+		&::before {
+			transform: translate(0, 0);
+		}
+	}
+`;
 
 export const ButtonStyle = styled.button`
 	border-radius: 2px;
@@ -22,6 +72,7 @@ export const ButtonStyle = styled.button`
 		min-height: 18px;
 	}
 	p {
+		transition: all 0.4s ease 0s;
 		margin: 0;
 		font-size: ${rem(14)};
 		line-height: 143%;
@@ -29,63 +80,12 @@ export const ButtonStyle = styled.button`
 		z-index: 1;
 	}
 	${(props) => {
-		// Если тип равняеться primary, то добавляем следующие стили
 		if (props.type === "primary") {
-			return `
-                padding: 12px 30px;
-                background: #0061df;
-                border: 1px solid #0061df;
-                p {
-                    color: #ffffff;
-                }
-                &:hover {
-                    background-color: #1053a9;
-                }
-            `;
-		}
-		// Если тип равняеться secondary, то добавляем следующие стили
-		else if (props.type === "secondary") {
-			return `
-                border: 1px solid #e6e9ec;
-                background-color: transparent;
-                p {
-                    color: #0d263b;
-                }
-                &:hover {
-                    background-color: #d7cdcd;
-                }
-            `;
-		}
-		// Иначе добавляем следующие стили
-		else {
-			return `
-                border: 1px solid #ffffff;
-                background-color: transparent;
-                p {
-                    color: #fff;
-                    transition: all 0.4s ease 0s;
-                }
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    top: 0;
-                    transition: all 0.6s ease 0s;
-                    left: 0;
-                    transform: skew(-20deg) translate(-120%, 0);
-                    width: 120%;
-                    height: 100%;
-                    background-color: #fff;
-                }
-                &:hover {
-                    p {
-                        color: #0d263b;
-                    }
-                    &::before {
-                        transform: translate(0, 0);
-                    }
-                }
-            `;
+			return PrimaryButton;
+		} else if (props.type === "secondary") {
+			return SecondaryButton;
+		} else {
+			return DefaultButton;
 		}
 	}}
 `;

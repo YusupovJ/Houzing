@@ -128,6 +128,7 @@ export const HeaderStyle = styled.header`
 			color: #bbbaba;
 		}
 	}
+
 	.header__nav-body {
 		display: flex;
 		align-items: center;
@@ -195,13 +196,18 @@ export const HeaderStyle = styled.header`
 			padding: 10px;
 			order: 3;
 			border: none;
+			width: 30px;
 			&::before {
 				display: none;
 			}
 			p {
 				display: none;
 			}
+			svg {
+				margin: 0;
+			}
 		}
+
 		.header__nav-body {
 			position: absolute;
 			overflow: auto;

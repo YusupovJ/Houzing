@@ -21,8 +21,8 @@ const Filter = (props) => {
 	const [searchKeys, setSearchKeys] = useState({});
 
 	/* -------------------------------- */
-	// Очистка url после перезагрузки страницы
 
+	// Очистка url после перезагрузки страницы
 	window.onload = function () {
 		let loaded = sessionStorage.getItem("loaded");
 		if (loaded) {
@@ -36,26 +36,19 @@ const Filter = (props) => {
 		navigate(`${location.pathname}`);
 	};
 	/* -------------------------------- */
-	// Открытие поповера
 
+	// Открытие поповера
 	const togglePopover = (e) => {
-		// Если кликнута кнопка, то тоглиться поповер
 		if (e.target.closest(".filter__button")) {
 			setPopover(!popover);
-		}
-		// Если мы нажимаем на поповер крому кнопки Cansel, то не закрываем
-		else if (
+		} else if (
 			e.target.closest(".popover") &&
 			!e.target.closest(".popover__button_cansel")
 		) {
 			setPopover(true);
-		}
-		// Если нажимаем на кнопку Cansel то закрываем поповер
-		else if (e.target.closest(".popover__button_cansel")) {
+		} else if (e.target.closest(".popover__button_cansel")) {
 			setPopover(false);
-		}
-		// Если нажимаем на любое место в браузере то закрываем поповер
-		else {
+		} else {
 			setPopover(false);
 		}
 	};
@@ -67,7 +60,6 @@ const Filter = (props) => {
 	// Формируем объект из name и value
 	const getURLSearch = (e) => {
 		const { value, name } = e.target;
-		console.log(value, name);
 		setSearchKeys({ ...searchKeys, [name]: value });
 	};
 
@@ -84,11 +76,14 @@ const Filter = (props) => {
 
 	// Отправляем данные на сервер
 	const submit = (e) => {
-		// Если находимся на главной странице то переходим в properties
-		if (location.pathname === "/") {
-			navigate(`/properties${urlSearchToString(searchKeys)}`);
-		} else {
-			navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
+		if (urlSearchToString(searchKeys)) {
+			if (location.pathname === "/") {
+				navigate(`/properties${urlSearchToString(searchKeys)}`);
+			} else {
+				navigate(
+					`${location.pathname}${urlSearchToString(searchKeys)}`
+				);
+			}
 		}
 	};
 

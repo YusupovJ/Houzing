@@ -27,17 +27,15 @@ const Products = (props) => {
 				</Title>
 				<Swiper
 					className="products__slider"
-					loop={true} // бесконечность
-					navigation={true} // стрелки
-					spaceBetween={20} // расстояние между слайдами
+					loop={true}
+					navigation={true}
+					spaceBetween={20}
 					pagination={{
-						// точки
 						clickable: true,
 						dynamicBullets: true,
 					}}
-					modules={[Pagination, Navigation]} // использованые модули
+					modules={[Pagination, Navigation]}
 					breakpoints={{
-						// Если передаем 4 элемента то количество слайдов в брейкпоинтах увеличиваеться на 1
 						0: {
 							slidesPerView: props.elemCount === 4 ? 2 : 1,
 						},
@@ -49,7 +47,6 @@ const Products = (props) => {
 						},
 					}}
 				>
-					{/* Передаем в качестве параметров карточки */}
 					{props.children}
 				</Swiper>
 			</div>
