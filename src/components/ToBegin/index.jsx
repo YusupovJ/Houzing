@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const ToBegin = ({ children }) => {
-	useEffect(() => {
-		document.documentElement.scrollTo({
-			top: "0px",
-		});
-	}, []);
+    useEffect(() => {
+        document.documentElement.scrollTo({
+            top: "0px",
+        });
+    }, []);
 
-	return children;
+    return children;
 };
 
 export default ToBegin;

@@ -13,9 +13,9 @@ import "./assets/styles/style.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-	<BrowserRouter>
-		<GlobalContext>
-			<Root />
-		</GlobalContext>
-	</BrowserRouter>
+    <BrowserRouter>
+        <GlobalContext>
+            <Root />
+        </GlobalContext>
+    </BrowserRouter>
 );

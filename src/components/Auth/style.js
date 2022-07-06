@@ -53,6 +53,9 @@ export const AuthStyle = styled.main`
 			}
 		}
 	}
+	.auth__error {
+		color: red;
+	}
 	.auth__action {
 		display: flex;
 		justify-content: space-between;
@@ -75,13 +78,25 @@ export const AuthStyle = styled.main`
 			cursor: pointer;
 		}
 	}
-	.auth__forgot {
+	.auth__link {
 		font-size: ${rem(16)};
 		line-height: 150%;
 		text-decoration-line: underline;
 		color: #0061df;
 		:hover {
 			color: #3d84e1;
+		}
+	}
+	.auth__have-not-acc {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		p {
+			margin-right: 4px;
+			font-size: 1rem;
+			line-height: 150%;
+			text-align: center;
+			color: #696969;
 		}
 	}
 	@media only screen and (max-width: ${em(767.98)}) {
