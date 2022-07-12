@@ -4,7 +4,6 @@ import { rem, em } from "../../../helpers/functions/functions";
 export const UserInfoStyle = styled.div`
 	cursor: pointer;
 	z-index: 1000;
-	margin: 0px 0px 0px 56px;
 	position: relative;
 	.user-info__ava {
 		width: 35px;
@@ -89,8 +88,8 @@ export const UserInfoStyle = styled.div`
 		}
 	}
 	@media only screen and (max-width: ${em(767.98)}) {
+		order: 3;
 		.user-info__user {
-			order: 3;
 			flex: 0 0 35px;
 			height: 35px;
 			margin: 0;

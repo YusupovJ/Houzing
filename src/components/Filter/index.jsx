@@ -41,10 +41,7 @@ const Filter = (props) => {
 	const togglePopover = (e) => {
 		if (e.target.closest(".filter__button")) {
 			setPopover(!popover);
-		} else if (
-			e.target.closest(".popover") &&
-			!e.target.closest(".popover__button_cansel")
-		) {
+		} else if (e.target.closest(".popover") && !e.target.closest(".popover__button_cansel")) {
 			setPopover(true);
 		} else if (e.target.closest(".popover__button_cansel")) {
 			setPopover(false);
@@ -80,9 +77,7 @@ const Filter = (props) => {
 			if (location.pathname === "/") {
 				navigate(`/properties${urlSearchToString(searchKeys)}`);
 			} else {
-				navigate(
-					`${location.pathname}${urlSearchToString(searchKeys)}`
-				);
+				navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
 			}
 		}
 	};
@@ -97,8 +92,13 @@ const Filter = (props) => {
 					className="filter__input"
 					placeholder="Enter a name"
 					name="house_name"
-					onBlur={getURLSearch}
+					onChange={getURLSearch}
 					autoComplete="off"
+					onKeyDown={(e) => {
+						if (e.code === "Enter") {
+							submit(e);
+						}
+					}}
 				/>
 				<div type="secondary" className="filter__advanced">
 					<Button type="secondary" className="filter__button">
@@ -106,11 +106,7 @@ const Filter = (props) => {
 						<p>Advanced</p>
 					</Button>
 				</div>
-				<Button
-					type="primary"
-					onClick={submit}
-					className="filter__submit"
-				>
+				<Button type="primary" onClick={submit} className="filter__submit">
 					<SearchIcon />
 					<p>Search</p>
 				</Button>
@@ -119,9 +115,7 @@ const Filter = (props) => {
 						{popoverData.map((item) => {
 							return (
 								<React.Fragment key={item.id}>
-									<h3 className="popover__title">
-										{item.title}
-									</h3>
+									<h3 className="popover__title">{item.title}</h3>
 									<div className="popover__inputs">
 										{item.inputs.map((input) => {
 											return (
@@ -130,10 +124,13 @@ const Filter = (props) => {
 													key={input.id}
 													autoComplete="off"
 													name={input.name}
-													onBlur={getURLSearch}
-													placeholder={
-														input.placeholder
-													}
+													onChange={getURLSearch}
+													placeholder={input.placeholder}
+													onKeyDown={(e) => {
+														if (e.code === "Enter") {
+															submit(e);
+														}
+													}}
 												/>
 											);
 										})}
@@ -143,17 +140,10 @@ const Filter = (props) => {
 						})}
 					</div>
 					<div className="popover__buttons">
-						<Button
-							type="secondary"
-							className="popover__button popover__button_cansel"
-						>
+						<Button type="secondary" className="popover__button popover__button_cansel">
 							<p>Cancel</p>
 						</Button>
-						<Button
-							onClick={submit}
-							type="primary"
-							className="popover__button"
-						>
+						<Button onClick={submit} type="primary" className="popover__button">
 							<p>Submit</p>
 						</Button>
 					</div>

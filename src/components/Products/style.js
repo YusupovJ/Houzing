@@ -55,6 +55,9 @@ export const ProductsStyle = styled.section`
 	.swiper-wrapper {
 		align-items: stretch;
 	}
+	.swiper-slide {
+		height: auto;
+	}
 	.swiper-button-prev,
 	.swiper-button-next {
 		padding: 0;
@@ -119,8 +122,7 @@ export const ProductsStyle = styled.section`
 	}
 	@media only screen and (min-width: ${em(1439.98)}) {
 		.swiper-pagination {
-			display: ${(props) =>
-				props.pagination === false ? "none" : "block"};
+			display: ${(props) => (props.pagination === false ? "none" : "block")};
 		}
 	}
 	@media only screen and (max-width: ${em(1023.98)}) {

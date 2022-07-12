@@ -13,18 +13,19 @@ import Popular from "./Popular";
 import CommentsCard from "./CommentsCard";
 import ToBegin from "../../components/ToBegin";
 
-const url = process.env.REACT_APP_PUBLIC_URL;
+const URL = process.env.REACT_APP_PUBLIC_URL;
 
 const Main = (props) => {
-	console.log("RENDER");
 	const showFilter = useMatchMedia();
 	const [categoryList, setCategoryList] = useState([]);
 
-	const token = JSON.parse(localStorage.getItem("login")).authenticationToken;
+	const token = JSON.parse(
+		localStorage.getItem("login")
+	)?.authenticationToken;
 
 	// Список категорий
 	useEffect(() => {
-		const request = fetch(`${url}/v1/categories/list`).then((res) =>
+		const request = fetch(`${URL}/v1/categories/list`).then((res) =>
 			res.json()
 		);
 		request.then((res) => {

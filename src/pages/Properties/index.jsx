@@ -9,17 +9,23 @@ import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
 import { ReactComponent as RequestNotFound } from "../../assets/svg/requestNotFound.svg";
 import ToBegin from "../../components/ToBegin";
 
-const url = process.env.REACT_APP_PUBLIC_URL;
+const URL = process.env.REACT_APP_PUBLIC_URL;
 
 /* Компонент фильтра */
 
 const Properties = (props) => {
-	let location = useLocation();
+	const location = useLocation();
 	const [cards, setCards] = useState([]);
 	const [cardsMaxLength, setCardsMaxLength] = useState(15);
 
+	const token = JSON.parse(
+		localStorage.getItem("login")
+	)?.authenticationToken;
+
+	/* ------------------------------------ */
+
 	useEffect(() => {
-		const request = fetch(`${url}/v1/houses/list${location.search}`).then(
+		const request = fetch(`${URL}/v1/houses/list${location.search}`).then(
 			(response) => response.json()
 		);
 		request
@@ -31,9 +37,13 @@ const Properties = (props) => {
 			});
 	}, [location.search]);
 
+	/* ------------------------------------ */
+
 	const showMore = () => {
 		setCardsMaxLength(cardsMaxLength + 16);
 	};
+
+	/* ------------------------------------ */
 
 	return (
 		<ToBegin>
@@ -69,6 +79,11 @@ const Properties = (props) => {
 								cards.slice(0, cardsMaxLength).map((card) => {
 									return (
 										<Card
+											to={
+												token
+													? `/properties/${card.id}`
+													: "/login"
+											}
 											key={card.id}
 											address={[
 												card.country,
