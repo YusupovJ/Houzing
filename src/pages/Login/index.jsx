@@ -23,6 +23,7 @@ const Login = (props) => {
 
 	/*------------------------------------*/
 
+	// Получаем данные с инпутов
 	const getUserData = (e, type) => {
 		let userDataClone = Object.assign({}, userData);
 
@@ -67,10 +68,7 @@ const Login = (props) => {
 			request.then((res) => {
 				const saved = Object.assign({}, res, { checked: true });
 
-				localStorage.setItem(
-					"login",
-					JSON.stringify(checkRef.current.checked ? saved : res)
-				);
+				localStorage.setItem("login", JSON.stringify(checkRef.current.checked ? saved : res));
 
 				navigate("/");
 			});
@@ -93,40 +91,25 @@ const Login = (props) => {
 					className={`auth__input ${access.email ? "" : "err"}`}
 					autoComplete="off"
 					defaultValue={login?.checked ? login?.username : ""}
-					onFocus={() =>
-						setAccess({ password: access.password, email: true })
-					}
+					onFocus={() => setAccess({ password: access.password, email: true })}
 					onBlur={(e) => getUserData(e, "email")}
 				/>
 				<input
 					type="text"
-					className={`auth__input auth__input_password ${
-						access.password ? "" : "err"
-					}`}
+					className={`auth__input auth__input_password ${access.password ? "" : "err"}`}
 					placeholder="Password"
 					autoComplete="off"
-					onFocus={() =>
-						setAccess({ email: access.email, password: true })
-					}
+					onFocus={() => setAccess({ email: access.email, password: true })}
 					onBlur={(e) => getUserData(e, "password")}
 				/>
 				<div className="auth__action">
 					<div className="auth__remember">
-						<input
-							type="checkbox"
-							id="remember"
-							ref={checkRef}
-							name="remember"
-						/>
+						<input type="checkbox" id="remember" ref={checkRef} name="remember" />
 						<label htmlFor="remember">Remember me</label>
 					</div>
 					<p className="auth__link">Forgot</p>
 				</div>
-				<Button
-					onClick={submit}
-					type="primary"
-					className="auth__button"
-				>
+				<Button onClick={submit} type="primary" className="auth__button">
 					<p>Login</p>
 				</Button>
 				<div className="auth__have-not-acc">

@@ -92,19 +92,11 @@ const Header = (props) => {
 	return (
 		<HeaderStyle ref={header} className="header">
 			<div className="header__container">
-				<Link
-					onClick={closeBurgerOnRedirect}
-					to="/"
-					className="header__logo"
-				>
+				<Link onClick={closeBurgerOnRedirect} to="/" className="header__logo">
 					<Logo />
 					<p>Houzing</p>
 				</Link>
-				<nav
-					className={`header__navigator ${
-						burger === true ? "toggled" : "unToggled"
-					}`}
-				>
+				<nav className={`header__navigator ${burger === true ? "toggled" : "unToggled"}`}>
 					<div className="header__nav-body">
 						{navbar.map((link) => {
 							return (
@@ -121,9 +113,7 @@ const Header = (props) => {
 					</div>
 					<div
 						onClick={toggleBurger}
-						className={`header__burger ${
-							burger === true ? "toggled" : "unToggled"
-						}`}
+						className={`header__burger ${burger === true ? "toggled" : "unToggled"}`}
 					>
 						<div></div>
 					</div>
@@ -134,10 +124,7 @@ const Header = (props) => {
 				{userInfo?.authenticationToken ? (
 					<UserInfo popover={popover} logout={logout} />
 				) : (
-					<Button
-						onClick={() => navigate("/login")}
-						className="header__login"
-					>
+					<Button onClick={() => navigate("/login")} className="header__login">
 						<p>Login</p>
 						<Login className="header__login-icon" />
 					</Button>

@@ -4,7 +4,7 @@ import { PhotosStyle } from "./style";
 import Gallery from "../Gallery";
 
 const Photos = (props) => {
-	const showOtherList = useMatchMedia(991.98);
+	const media992 = useMatchMedia(991.98);
 	const [gallery, setGallery] = useState({ opened: false, index: 0 });
 
 	/* ------------------------------------ */
@@ -27,7 +27,7 @@ const Photos = (props) => {
 		let condtition = index === 4 && props?.photos?.length > 5;
 		let otherLength = props?.other?.length;
 
-		if (!showOtherList) {
+		if (!media992) {
 			otherLength = props.photos.length - 3;
 			condtition = index === 2 && props?.photos?.length > 3;
 		}
@@ -43,7 +43,7 @@ const Photos = (props) => {
 	if (props.photos.length > 0) {
 		return (
 			<PhotosStyle photosCount={props.photos.length} className={`product-view__photos photos`}>
-				{props.photos.slice(0, !showOtherList ? 3 : 5).map((photo, index, arr) => {
+				{props.photos.slice(0, !media992 ? 3 : 5).map((photo, index, arr) => {
 					return (
 						<div
 							key={index}

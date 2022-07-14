@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 import { rem, em } from "../../../helpers/functions/functions";
 
+/* ------------------------------------ */
+// Общий адаптив сетки
+
 const gridMedia = css`
 	@media only screen and (max-width: ${em(767.98)}) {
 		grid-template: 1fr 1fr / repeat(auto-fit, minmax(191px, 1fr));
@@ -11,11 +14,17 @@ const gridMedia = css`
 	}
 `;
 
+/* ------------------------------------ */
+
+// Основная сетка
 const grid = css`
 	grid-template: 1fr 1fr / repeat(auto-fit, minmax(223.5px, 1fr));
 	${gridMedia}
 `;
 
+/* ------------------------------------ */
+
+// Сетка для двуч фотографий
 const gridTwo = css`
 	grid-template: 1fr / repeat(auto-fit, minmax(290px, 1fr));
 	.photos__photo_big {
@@ -26,10 +35,18 @@ const gridTwo = css`
 		gap: 10px;
 	}
 `;
+
+/* ------------------------------------ */
+
+// Сетка для трех фотографий
 const gridThree = css`
 	grid-template: 1fr 1fr / repeat(auto-fit, minmax(290px, 1fr));
 	${gridMedia}
 `;
+
+/* ------------------------------------ */
+
+// Сетка для четырех фотографий
 const gridFour = css`
 	grid-template: 1fr 1fr / repeat(auto-fit, minmax(223.5px, 1fr));
 	grid-auto-flow: column;
@@ -44,6 +61,8 @@ const gridFour = css`
 	}
 `;
 
+/* ------------------------------------ */
+
 export const PhotosStyle = styled.section`
 	display: grid;
 	gap: 20px;
@@ -56,7 +75,6 @@ export const PhotosStyle = styled.section`
 		overflow: hidden;
 		padding: 0px 0px 50% 0px;
 		user-select: none;
-		border: 1px solid #000;
 		&_big {
 			grid-row: 1 / 3;
 			grid-column: 1 / 3;

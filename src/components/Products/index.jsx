@@ -16,11 +16,7 @@ import "swiper/css/navigation";
 
 const Products = (props) => {
 	return (
-		<ProductsStyle
-			bg={props.bg || "white"}
-			pagination={props.pagination}
-			className="products"
-		>
+		<ProductsStyle bg={props.bg || "white"} pagination={props.pagination} className="products">
 			<div className="products__container">
 				<Title className="products__text-block" title={props.title}>
 					{props.text}

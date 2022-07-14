@@ -6,6 +6,8 @@ import { ReactComponent as Arrow } from "../../../assets/svg/arrow.svg";
 import { ReactComponent as Logout } from "../../../assets/svg/logout.svg";
 import { ReactComponent as User } from "../../../assets/svg/user.svg";
 
+/* Дополнительная информация о пользователе */
+
 const UserInfo = ({ popover, logout }) => {
 	const [userData, setUserData] = useState({
 		authorities: [{ name: null }],

@@ -5,6 +5,8 @@ import { footer } from "../../helpers/utils/footer";
 import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
 import { ReactComponent as Arrow } from "../../assets/svg/arrow.svg";
 
+/* Подвал */
+
 const Footer = (props) => {
 	return (
 		<FooterStyle className="footer">
@@ -14,28 +16,19 @@ const Footer = (props) => {
 						return (
 							<div className="footer__col" key={col.id}>
 								<div className="footer__cell">
-									<h3 className="footer__title">
-										{col.title}
-									</h3>
+									<h3 className="footer__title">{col.title}</h3>
 									<ul className="footer__texts">
 										{col.cells.map((item) => {
 											if (item.link) {
 												return (
-													<a
-														href={item.href}
-														className="footer__text"
-														key={item.id}
-													>
+													<a href={item.href} className="footer__text" key={item.id}>
 														{item.icon || null}
 														<p>{item.text}</p>
 													</a>
 												);
 											}
 											return (
-												<li
-													className="footer__text"
-													key={item.id}
-												>
+												<li className="footer__text" key={item.id}>
 													{item.icon || null}
 													<p>{item.text}</p>
 												</li>

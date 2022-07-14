@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 /*------------------------------------*/
 
 const About = (props) => {
-	const showFilter = useMatchMedia();
+	const media768 = useMatchMedia();
 	return (
 		<AboutStyle className="about">
 			<div className="about__wrapper">
@@ -35,36 +35,22 @@ const About = (props) => {
 				>
 					{aboutSlides.map((slide, index) => {
 						return (
-							<SwiperSlide
-								key={index}
-								className="about__slide-item"
-							>
-								<img
-									src={slide.bg}
-									alt="BG"
-									className="about__bg"
-								/>
+							<SwiperSlide key={index} className="about__slide-item">
+								<img src={slide.bg} alt="BG" className="about__bg" />
 								<div className="about__container">
-									<h1 className="about__title">
-										{slide.title}
-									</h1>
+									<h1 className="about__title">{slide.title}</h1>
 									<p className="about__text">{slide.text}</p>
 									<ul className="about__ownerships">
 										{slide.own.map((item, index) => {
 											return (
-												<li
-													key={index}
-													className="about__own"
-												>
+												<li key={index} className="about__own">
 													{item.icon}
 													<p>{item.text}</p>
 												</li>
 											);
 										})}
 									</ul>
-									<p className="about__price">
-										{slide.price}
-									</p>
+									<p className="about__price">{slide.price}</p>
 									<Button className="about__button">
 										<p>Read more</p>
 									</Button>
@@ -73,7 +59,7 @@ const About = (props) => {
 						);
 					})}
 				</Swiper>
-				{showFilter ? null : <Filter />}
+				{media768 ? null : <Filter />}
 			</div>
 		</AboutStyle>
 	);

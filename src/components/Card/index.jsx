@@ -12,9 +12,7 @@ import { ReactComponent as Rule } from "../../assets/svg/rule.svg";
 /* Это шаблон карточки товара */
 
 const Card = (props) => {
-	const [favourited, setFavourited] = useState(
-		props.favourite ? true : false
-	);
+	const [favourited, setFavourited] = useState(props.favourite ? true : false);
 
 	return (
 		<CardStyle className="card" to={props?.to || ""}>
@@ -28,9 +26,7 @@ const Card = (props) => {
 			</div>
 			<div className="card__body">
 				<h3 className="card__title">{props.title || "Without name"}</h3>
-				<p className="card__address">
-					{props.address || "Without address"}
-				</p>
+				<p className="card__address">{props.address || "Without address"}</p>
 				<ul className="card__ownership">
 					<li className="card__own">
 						<Bed />
@@ -52,9 +48,7 @@ const Card = (props) => {
 			</div>
 			<div className="card__info">
 				<div className="card__price">
-					<del className="card__sale-price">
-						${props.sale || 0}/mo
-					</del>
+					<del className="card__sale-price">${props.sale || 0}/mo</del>
 					<p className="card__real-price">${props.price || 0}/mo</p>
 				</div>
 				<div className="card__action">

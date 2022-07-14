@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 
-const ToBegin = ({ children }) => {
-    useEffect(() => {
-        document.documentElement.scrollTo({
-            top: "0px",
-        });
-    }, []);
+/* Компонент высшего порядка, чтобы при переходе на страницу оказываться на верху */
 
-    return children;
+const ToBegin = ({ children }) => {
+	useEffect(() => {
+		document.documentElement.scrollTo({
+			top: "0px",
+		});
+	}, []);
+
+	return children;
 };
 
 export default ToBegin;
