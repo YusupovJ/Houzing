@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { ProductInfoStyle } from "./style";
+import { Global } from "../../../helpers/context/store";
 import Title from "../../../components/Title";
 import { ReactComponent as Favourite } from "../../../assets/svg/favourite.svg";
 import { ReactComponent as Share } from "../../../assets/svg/share.svg";
@@ -14,6 +15,7 @@ const ProductInfo = ({ house }) => {
 	const media768 = useMatchMedia(767.98);
 	const descRef = useRef();
 	const [showMore, setShowMore] = useState(true);
+	const { alerts, setAlerts } = useContext(Global);
 
 	const hanleDescription = () => {
 		const cords = descRef.current.getBoundingClientRect().top;
@@ -28,6 +30,35 @@ const ProductInfo = ({ house }) => {
 		}
 	};
 
+	/* ------------------------------------ */
+
+	const copyUrl = () => {
+		const location = window.location.href;
+
+		navigator.clipboard
+			.writeText(location)
+			.then(() => {
+				setAlerts([
+					...alerts,
+					{
+						type: "success",
+						text: "Link successfully copied!",
+						id: Math.random() * 10000000000,
+					},
+				]);
+			})
+			.catch((err) => {
+				setAlerts([
+					...alerts,
+					{
+						type: "error",
+						text: err,
+						id: Math.random() * 10000000000,
+					},
+				]);
+			});
+	};
+
 	return (
 		<ProductInfoStyle className="product-view__product-info product-info">
 			<div className="product-info__row">
@@ -35,7 +66,7 @@ const ProductInfo = ({ house }) => {
 					{[house?.country, house?.city, house?.region, house?.address].filter((item) => item).join(", ")}
 				</Title>
 				<div className="product-info__action">
-					<button className="product-info__button">
+					<button onClick={copyUrl} className="product-info__button">
 						<div className="product-info__icon product-info__icon_share">
 							<Share />
 						</div>

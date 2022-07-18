@@ -73,7 +73,7 @@ export const GalleryStyle = styled(Swiper)`
 		right: 10px;
 		width: 30px;
 		height: 30px;
-		fill: #fff;
+		stroke: #fff;
 		transition: all 0.4s ease 0s;
 		&:active {
 			transform: scale(0.9);

@@ -1,21 +1,27 @@
-import React, { memo, useRef, useState } from "react";
+import React, { memo, useRef, useState, useEffect, useContext } from "react";
 import Auth from "../../components/Auth";
 import Button from "../../components/Button";
-import { useNavigate, Link } from "react-router-dom";
+import Input from "../../components/Input";
 import ToBegin from "../../components/ToBegin";
+import { useNavigate, Link } from "react-router-dom";
+import { Global } from "../../helpers/context/store";
 
 const URL = process.env.REACT_APP_PUBLIC_URL;
 
 const Login = (props) => {
 	const navigate = useNavigate();
+	// Реферал для галочки "сохранения эмейла"
 	const checkRef = useRef();
+	const { alerts, setAlerts } = useContext(Global);
 	const login = JSON.parse(localStorage.getItem("login"));
 
+	// Данные с инпутов
 	const [userData, setUserData] = useState({
 		email: login?.username || "",
 		password: "",
 	});
 
+	// Разрешение на отправку
 	const [access, setAccess] = useState({
 		email: true,
 		password: true,
@@ -37,41 +43,73 @@ const Login = (props) => {
 
 	/*------------------------------------*/
 
+	// Валидация
 	const validate = () => {
 		let emailReg = /.+@.+\.\w+/;
-		let passwordReg = /[\w,\s]{6,20}/;
 
 		let emailCondition = emailReg.test(userData.email) === true;
-		let passwordCondition = passwordReg.test(userData.password) === true;
+		let passwordCondition = userData.password.length > 0;
 
 		return { emailCondition, passwordCondition };
 	};
 
+	/* ------------------------------------ */
+
+	// Если уже вошли в аккаунт, выкидываем обратно
+	useEffect(() => {
+		if (login?.authenticationToken) {
+			navigate("/");
+		}
+	});
+
 	/*------------------------------------*/
 
-	const submit = (e) => {
+	const submit = async (e) => {
 		if (validate().emailCondition && validate().passwordCondition) {
-			// Убираем красные линии в инпутах
-			setAccess({
-				email: true,
-				password: true,
-			});
+			try {
+				const request = await fetch(`${URL}/public/auth/login`, {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(userData),
+				});
 
-			const request = fetch(`${URL}/public/auth/login`, {
-				method: "POST",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: JSON.stringify(userData),
-			}).then((res) => res.json());
+				/* ------------------------------------ */
 
-			request.then((res) => {
-				const saved = Object.assign({}, res, { checked: true });
+				if (request.status >= 500) {
+					throw new Error(`${request.status}: Internal server error`);
+				} else if (request.status === 401) {
+					throw new Error(`Password or login entered incorrectly`);
+				}
 
-				localStorage.setItem("login", JSON.stringify(checkRef.current.checked ? saved : res));
+				/* ------------------------------------ */
+
+				const response = await request.json();
+
+				setAlerts([
+					...alerts,
+					{
+						type: "success",
+						id: Math.random() * 100000000000000,
+						text: `You have successfully logged in to ${response.username}`,
+					},
+				]);
+
+				const saved = Object.assign({}, response, { checked: true });
+				localStorage.setItem("login", JSON.stringify(checkRef.current.checked ? saved : response));
 
 				navigate("/");
-			});
+			} catch (error) {
+				setAlerts([
+					...alerts,
+					{
+						type: "error",
+						id: Math.random() * 100000000000000,
+						text: `${error}`,
+					},
+				]);
+			}
 		} else {
 			setAccess({
 				email: validate().emailCondition,
@@ -82,25 +120,38 @@ const Login = (props) => {
 
 	/*------------------------------------*/
 
+	// При загрузки страницы вызываем focus для email, чтобы placeholder
+	// поднялся наверх, если там есть значение
+	// В компоненте Input я вызвал функцию поднятья placeholder
+	useEffect(() => {
+		document.querySelector(".auth__input > input").focus();
+	}, []);
+
 	return (
 		<ToBegin>
 			<Auth title="Sign in">
-				<input
+				<Input
 					type="email"
 					placeholder="Email"
-					className={`auth__input ${access.email ? "" : "err"}`}
+					err={!access.email}
+					className={`auth__input`}
 					autoComplete="off"
 					defaultValue={login?.checked ? login?.username : ""}
-					onFocus={() => setAccess({ password: access.password, email: true })}
-					onBlur={(e) => getUserData(e, "email")}
+					onBlur={(e) => {
+						getUserData(e, "email");
+						setAccess({ email: true, password: access.email });
+					}}
 				/>
-				<input
+				<Input
 					type="text"
-					className={`auth__input auth__input_password ${access.password ? "" : "err"}`}
+					id="password"
+					err={!access.password}
+					className={`auth__input auth__input_password`}
 					placeholder="Password"
-					autoComplete="off"
-					onFocus={() => setAccess({ email: access.email, password: true })}
-					onBlur={(e) => getUserData(e, "password")}
+					onBlur={(e) => {
+						getUserData(e, "password");
+						setAccess({ email: access.email, password: true });
+					}}
 				/>
 				<div className="auth__action">
 					<div className="auth__remember">

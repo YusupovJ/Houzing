@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { ProductViewStyle, ContainerRight, ContainerLeft } from "./style";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import notAvailable from "../../assets/img/notAvailable.png";
 import Photos from "./Photos";
 import ProductInfo from "./ProductInfo";
 import ToBegin from "../../components/ToBegin";
+import SendEmail from "./SendEmail";
 
 const URL = process.env.REACT_APP_PUBLIC_URL;
 
@@ -58,25 +59,18 @@ const ProductView = (props) => {
 		<ToBegin>
 			<ProductViewStyle className="product-view">
 				<div className="product-view__container">
+					<Photos photos={attachments} other={attachments.slice(5)} />
+
 					{/* -------------------------- */}
 
-					{/* <ContainerRight>
-						<Photos
-							photos={attachments.slice(3, 5)}
-							allPhotos={attachments}
-							other={attachments.slice(5)}
-							type="right"
-						/>
-					</ContainerRight> */}
-
-					<Photos photos={attachments} other={attachments.slice(5)} />
 					<ContainerLeft>
 						<ProductInfo house={house} />
 					</ContainerLeft>
+
+					{/* -------------------------- */}
+
 					<ContainerRight>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, optio inventore. Quia
-						dolorum minus eligendi ipsa nam minima omnis temporibus at nesciunt quis reiciendis velit,
-						architecto veniam itaque aliquid voluptate?
+						<SendEmail user={house?.user} />
 					</ContainerRight>
 				</div>
 			</ProductViewStyle>
@@ -84,4 +78,4 @@ const ProductView = (props) => {
 	);
 };
 
-export default ProductView;
+export default memo(ProductView);

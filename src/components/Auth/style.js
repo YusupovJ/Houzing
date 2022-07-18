@@ -19,10 +19,8 @@ export const AuthStyle = styled.main`
 	.auth__body {
 		display: flex;
 		flex-direction: column;
-		gap: 40px;
 	}
 	.auth__title {
-		margin: 0px 0px 44px 0px;
 		font-weight: 600;
 		font-size: ${rem(18)};
 		line-height: 156%;
@@ -30,39 +28,33 @@ export const AuthStyle = styled.main`
 	}
 	.auth__button {
 		width: 100%;
+		margin: 20px 0px 32px 0px;
+	}
+	.auth__error {
+		color: red;
+		font-size: ${rem(17)};
+		z-index: 10;
+		margin: 0px 0px 10px;
 	}
 	.auth__input {
-		padding: 4px 0px;
-		font-size: ${rem(14)};
-		line-height: 143%;
-		color: #0d263b;
-		border-bottom: 2px solid #e6e9ec;
-		transition: all 0.3s ease 0s;
-		:focus {
-			border-bottom: 2px solid #0061df;
-		}
-		&.err {
-			border-bottom: 2px solid red;
+		margin: 40px 0px 0px 0px;
+		.input__placeholder {
+			font-family: Montserrat;
+			-webkit-text-security: none;
 		}
 		&_password {
 			font-family: text-security-disc;
 			color: #818f9b;
 			-webkit-text-security: disc;
-			&::placeholder {
-				font-family: Montserrat;
-			}
 		}
 	}
-	.auth__error {
-		color: red;
-	}
+
 	.auth__action {
 		display: flex;
 		justify-content: space-between;
+		margin: 16px 0px 10px 0px;
 	}
-	.auth__err {
-		color: red;
-	}
+
 	.auth__remember {
 		display: flex;
 		align-items: center;
@@ -83,25 +75,32 @@ export const AuthStyle = styled.main`
 		line-height: 150%;
 		text-decoration-line: underline;
 		color: #0061df;
+		cursor: pointer;
 		:hover {
 			color: #3d84e1;
 		}
 	}
 	.auth__have-not-acc {
 		display: flex;
-		justify-content: center;
+		margin: 0px auto;
 		align-items: center;
+		transition: all 0.3s ease 0s;
 		p {
+			text-align: center;
 			margin-right: 4px;
 			font-size: 1rem;
 			line-height: 150%;
-			text-align: center;
 			color: #696969;
 		}
 	}
 	@media only screen and (max-width: ${em(767.98)}) {
 		.auth__wrapper {
 			padding: 30px 15px;
+		}
+	}
+	@media only screen and (max-width: ${em(424.98)}) {
+		.auth__have-not-acc {
+			flex-direction: column;
 		}
 	}
 `;
