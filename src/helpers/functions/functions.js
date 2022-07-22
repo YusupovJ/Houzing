@@ -113,7 +113,7 @@ export const bodyToggle = (state) => {
 	const bodyUnlock = () => {
 		document.body.classList.remove("lock");
 		document.body.style.marginRight = `0px`;
-		document.querySelector(".header__container").style.marginRight = `0px`;
+		document.querySelector(".header__container").style.marginRight = `auto`;
 	};
 
 	if (state) {

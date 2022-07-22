@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMatchMedia } from "../../../helpers/functions/functions";
+import React, { useEffect, useState } from "react";
+import { bodyToggle, useMatchMedia } from "../../../helpers/functions/functions";
 import { PhotosStyle } from "./style";
 import Gallery from "../Gallery";
 
@@ -10,18 +10,18 @@ const Photos = (props) => {
 	/* ------------------------------------ */
 
 	const openGallery = (index) => {
-		setGallery({ opened: true, index: index });
-		document.body.classList.add("lock");
+		setGallery({ opened: true, index });
 	};
-
-	/* ------------------------------------ */
 
 	const closeGallery = () => {
 		setTimeout(() => {
 			setGallery({ opened: false });
-			document.body.classList.remove("lock");
 		}, 400);
 	};
+
+	useEffect(() => {
+		bodyToggle(gallery.opened);
+	}, [gallery]);
 
 	/* ------------------------------------ */
 

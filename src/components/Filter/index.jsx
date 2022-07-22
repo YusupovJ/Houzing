@@ -35,6 +35,7 @@ const Filter = (props) => {
 	const reloaded = () => {
 		navigate(`${location.pathname}`);
 	};
+
 	/* -------------------------------- */
 
 	// Открытие поповера
@@ -73,12 +74,10 @@ const Filter = (props) => {
 
 	// Отправляем данные на сервер
 	const submit = (e) => {
-		if (urlSearchToString(searchKeys)) {
-			if (location.pathname === "/") {
-				navigate(`/properties${urlSearchToString(searchKeys)}`);
-			} else {
-				navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
-			}
+		if (location.pathname === "/") {
+			navigate(`/properties${urlSearchToString(searchKeys)}`);
+		} else {
+			navigate(`${location.pathname}${urlSearchToString(searchKeys)}`);
 		}
 	};
 
