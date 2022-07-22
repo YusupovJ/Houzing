@@ -23,6 +23,6 @@ export const ContainerRight = styled.div`
 	flex: 0 0 280px;
 	padding: 0;
 	@media only screen and (max-width: ${em(991.98)}) {
-		display: none;
+		flex: 0 0 0;
 	}
 `;

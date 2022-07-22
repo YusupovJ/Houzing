@@ -1,10 +1,10 @@
-import React, { memo, useRef, useState, useEffect, useContext } from "react";
+import React, { memo, useRef, useState, useEffect } from "react";
 import Auth from "../../components/Auth";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import ToBegin from "../../components/ToBegin";
 import { useNavigate, Link } from "react-router-dom";
-import { Global } from "../../helpers/context/store";
+import { useShowAlert } from "../../helpers/functions/functions";
 
 const URL = process.env.REACT_APP_PUBLIC_URL;
 
@@ -12,7 +12,7 @@ const Login = (props) => {
 	const navigate = useNavigate();
 	// Реферал для галочки "сохранения эмейла"
 	const checkRef = useRef();
-	const { alerts, setAlerts } = useContext(Global);
+	const showAlert = useShowAlert();
 	const login = JSON.parse(localStorage.getItem("login"));
 
 	// Данные с инпутов
@@ -87,28 +87,14 @@ const Login = (props) => {
 
 				const response = await request.json();
 
-				setAlerts([
-					...alerts,
-					{
-						type: "success",
-						id: Math.random() * 100000000000000,
-						text: `You have successfully logged in to ${response.username}`,
-					},
-				]);
+				showAlert("success", `You have successfully logged in to ${response.username}`);
 
 				const saved = Object.assign({}, response, { checked: true });
 				localStorage.setItem("login", JSON.stringify(checkRef.current.checked ? saved : response));
 
 				navigate("/");
 			} catch (error) {
-				setAlerts([
-					...alerts,
-					{
-						type: "error",
-						id: Math.random() * 100000000000000,
-						text: `${error}`,
-					},
-				]);
+				showAlert("error", error);
 			}
 		} else {
 			setAccess({
@@ -122,7 +108,7 @@ const Login = (props) => {
 
 	// При загрузки страницы вызываем focus для email, чтобы placeholder
 	// поднялся наверх, если там есть значение
-	// В компоненте Input я вызвал функцию поднятья placeholder
+	// В компоненте Input я вызвал функцию при фокусе поднятья placeholder
 	useEffect(() => {
 		document.querySelector(".auth__input > input").focus();
 	}, []);

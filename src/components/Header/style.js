@@ -233,7 +233,7 @@ export const HeaderStyle = styled.header`
 			background-color: #0d263b;
 			z-index: 10;
 			cursor: pointer;
-			padding: 11px 0px;
+			padding: 18px 10px;
 			& > div {
 				width: 30px;
 				height: 3px;

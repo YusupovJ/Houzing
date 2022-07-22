@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useContext } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { PropertiesStyle } from "./style";
 import { useLocation } from "react-router-dom";
 import Filter from "../../components/Filter";
@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
 import ToBegin from "../../components/ToBegin";
 import requestNotFound from "../../assets/img/requestNotFound.png";
-import { Global } from "../../helpers/context/store";
+import { useShowAlert } from "../../helpers/functions/functions";
 
 const URL = process.env.REACT_APP_PUBLIC_URL;
 
@@ -18,7 +18,7 @@ const Properties = (props) => {
 	const location = useLocation();
 	const [cards, setCards] = useState([]);
 	const [cardsMaxLength, setCardsMaxLength] = useState(15);
-	const { alerts, setAlerts } = useContext(Global);
+	const showAlert = useShowAlert();
 
 	const token = JSON.parse(localStorage.getItem("login"))?.authenticationToken;
 
@@ -29,17 +29,10 @@ const Properties = (props) => {
 		request.then((data) => {
 			setCards(data.data || ["nothing"]);
 			if (data.status >= 400) {
-				setAlerts([
-					...alerts,
-					{
-						type: "error",
-						id: Math.random() * 1000000,
-						text: `Error ${data.status}: ${data?.error}`,
-					},
-				]);
+				showAlert("error", `Error ${data.status}: ${data?.error}`);
 			}
 		});
-	}, [location.search, alerts, setAlerts]);
+	}, [location.search, showAlert]);
 
 	/* ------------------------------------ */
 

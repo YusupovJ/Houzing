@@ -40,7 +40,7 @@ export const AlertStyle = styled.div`
 	display: flex;
 	align-items: center;
 	position: fixed;
-	z-index: 10000;
+	z-index: 998;
 	background-color: #fff;
 	bottom: 0;
 	animation: ${hello} 0.4s cubic-bezier(0.3, 0.53, 0.32, 1.1) 0s 1 forwards;

@@ -19,8 +19,6 @@ const Main = (props) => {
 	const media768 = useMatchMedia();
 	const [categoryList, setCategoryList] = useState([]);
 
-	const token = JSON.parse(localStorage.getItem("login"))?.authenticationToken;
-
 	// Список категорий
 	useEffect(() => {
 		const request = fetch(`${URL}/v1/categories/list`).then((res) => res.json());
@@ -63,7 +61,7 @@ const Main = (props) => {
 					{categoryList.map((item) => {
 						return (
 							<SwiperSlide key={item.id}>
-								<CategoryCard to={!token ? "/login" : null} id={item.id} text={item.name} />
+								<CategoryCard id={item.id} text={item.name} />
 							</SwiperSlide>
 						);
 					})}

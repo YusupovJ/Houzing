@@ -1,7 +1,12 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import { ProductInfoStyle } from "./style";
-import { Global } from "../../../helpers/context/store";
 import Title from "../../../components/Title";
+import { useMatchMedia } from "../../../helpers/functions/functions";
+import { useShowAlert } from "../../../helpers/functions/functions";
+import Download from "../Download";
+
+/* ------------------------------------ */
+
 import { ReactComponent as Favourite } from "../../../assets/svg/favourite.svg";
 import { ReactComponent as Share } from "../../../assets/svg/share.svg";
 import { ReactComponent as Bed } from "../../../assets/svg/bed.svg";
@@ -9,13 +14,14 @@ import { ReactComponent as Bath } from "../../../assets/svg/bath.svg";
 import { ReactComponent as Car } from "../../../assets/svg/car.svg";
 import { ReactComponent as Ruler } from "../../../assets/svg/rule.svg";
 import { ReactComponent as Date } from "../../../assets/svg/date.svg";
-import { useMatchMedia } from "../../../helpers/functions/functions";
+
+/* ------------------------------------ */
 
 const ProductInfo = ({ house }) => {
 	const media768 = useMatchMedia(767.98);
 	const descRef = useRef();
+	const showAlert = useShowAlert();
 	const [showMore, setShowMore] = useState(true);
-	const { alerts, setAlerts } = useContext(Global);
 
 	const hanleDescription = () => {
 		const cords = descRef.current.getBoundingClientRect().top;
@@ -38,24 +44,10 @@ const ProductInfo = ({ house }) => {
 		navigator.clipboard
 			.writeText(location)
 			.then(() => {
-				setAlerts([
-					...alerts,
-					{
-						type: "success",
-						text: "Link successfully copied!",
-						id: Math.random() * 10000000000,
-					},
-				]);
+				showAlert("success", "Link successfully copied!");
 			})
 			.catch((err) => {
-				setAlerts([
-					...alerts,
-					{
-						type: "error",
-						text: err,
-						id: Math.random() * 10000000000,
-					},
-				]);
+				showAlert("error", err);
 			});
 	};
 
@@ -129,6 +121,7 @@ const ProductInfo = ({ house }) => {
 					</button>
 				)}
 			</article>
+			<Download />
 		</ProductInfoStyle>
 	);
 };

@@ -26,6 +26,7 @@ $paddingContainer: 16;
 /* Тело страницы ============================================================================= */
 
 body {
+	overflow-x: hidden;
 	font-family: $fontFamily;
 	background-color: #ffffff;
 	&.lock {

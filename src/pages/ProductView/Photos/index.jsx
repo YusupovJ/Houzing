@@ -11,6 +11,7 @@ const Photos = (props) => {
 
 	const openGallery = (index) => {
 		setGallery({ opened: true, index: index });
+		document.body.classList.add("lock");
 	};
 
 	/* ------------------------------------ */
@@ -18,6 +19,7 @@ const Photos = (props) => {
 	const closeGallery = () => {
 		setTimeout(() => {
 			setGallery({ opened: false });
+			document.body.classList.remove("lock");
 		}, 400);
 	};
 
@@ -40,6 +42,7 @@ const Photos = (props) => {
 	};
 
 	/* ------------------------------------ */
+
 	if (props.photos.length > 0) {
 		return (
 			<PhotosStyle photosCount={props.photos.length} className={`product-view__photos photos`}>
