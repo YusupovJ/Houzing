@@ -94,11 +94,7 @@ export const ProductInfoStyle = styled.section`
 		margin: 30px 0px 0px 0px;
 	}
 	.description__title {
-		font-weight: 600;
-		font-size: ${rem(18)};
 		margin: 0px 0px ${em(10, 18)} 0px;
-		line-height: 156%;
-		color: #0d263b;
 	}
 	.description__show-more {
 		font-size: ${rem(14)};

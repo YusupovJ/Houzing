@@ -111,7 +111,7 @@ const ProductInfo = ({ house }) => {
 				</div>
 			</div>
 			<article ref={descRef} className="product-info__description description">
-				<h3 className="description__title">Description</h3>
+				<h3 className="description__title title">Description</h3>
 				<div className={`description__text ${house?.description?.length > 696 && showMore ? "more" : ""}`}>
 					<p>{house?.description}</p>
 				</div>

@@ -36,7 +36,7 @@ export const InputStyle = styled.div`
 		}
 		&_textarea {
 			max-height: 100%;
-			height: 77px;
+			height: 75px;
 		}
 		&:focus {
 			border-bottom: 1px solid #0061df;

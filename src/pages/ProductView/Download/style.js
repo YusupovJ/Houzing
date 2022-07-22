@@ -4,10 +4,6 @@ import { rem, em } from "../../../helpers/functions/functions";
 export const DownloadStyle = styled.div`
 	margin: 48px 0px 0px 0px;
 	.download__title {
-		font-weight: 600;
-		font-size: ${rem(18)};
-		line-height: 156%;
-		color: #0d263b;
 	}
 	.download__files {
 		display: flex;
@@ -20,7 +16,7 @@ export const DownloadStyle = styled.div`
 		display: flex;
 		align-items: center;
 		span {
-			margin: 0px ${em(24)} 0px ${em(8)};
+			margin: 0px ${em(24, 14)} 0px ${em(8, 14)};
 			font-size: ${rem(14)};
 			line-height: 143%;
 			color: #696969;

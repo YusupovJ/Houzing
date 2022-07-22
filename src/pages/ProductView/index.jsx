@@ -7,6 +7,7 @@ import Photos from "./Photos";
 import ProductInfo from "./ProductInfo";
 import ToBegin from "../../components/ToBegin";
 import SendEmail from "./SendEmail";
+import Location from "./Location";
 
 const URL = process.env.REACT_APP_PUBLIC_URL;
 
@@ -18,13 +19,11 @@ const ProductView = (props) => {
 	/* ------------------------------------ */
 
 	const [house, setHouse] = useState({
-		attachments: [
-			{ imgPath: notAvailable },
-			{ imgPath: notAvailable },
-			{ imgPath: notAvailable },
-			{ imgPath: notAvailable },
-			{ imgPath: notAvailable },
-		],
+		attachments: [{ imgPath: notAvailable }, { imgPath: notAvailable }, { imgPath: notAvailable }],
+		location: {
+			latitude: undefined,
+			longitude: undefined,
+		},
 	});
 	const { attachments } = house;
 
@@ -52,6 +51,7 @@ const ProductView = (props) => {
 			setHouse(res.data);
 		});
 	}, [params.id, token]);
+	console.log(house);
 
 	/* ------------------------------------ */
 
@@ -65,6 +65,19 @@ const ProductView = (props) => {
 
 					<ContainerLeft>
 						<ProductInfo house={house} />
+						<span className="product-view__line"></span>
+						<Location
+							locProperties={{
+								address: house?.address,
+								city: house?.city,
+								area: house?.houseDetails?.area,
+								country: house?.country,
+								zip: house?.zipCode,
+								region: house?.region,
+							}}
+							lat={house?.location?.latitude}
+							lng={house?.location?.longitude}
+						/>
 					</ContainerLeft>
 
 					{/* -------------------------- */}
